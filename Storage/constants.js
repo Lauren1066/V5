@@ -28,8 +28,16 @@ const announcementPings = "1046503072500813914";
 const noCooldownRole = "1040834838690795560";
 const retiredStaffRole = "1046652860600942654";
 const mainStaffrole = "1040788165440577606";
+const levelonerole = "1040830062133530676";
+const levelfiverole = "1040830087307731005";
+const leveltenrole = "1040830091191652362";
+const leveltwentyrole = "1040830095243358340";
+const levelthirtyrole = "1040830099290857512";
+const levelfortyrole = "1040854023034634242";
+const levelfiftyrole = "1040830102814081065";
 
-const mongoosePath = "mongodb+srv://Luke:dEpLpbGSlDtMm9By@cluster0.tiums.mongodb.net/Testing?retryWrites=true&w=majority";
+const mongoosePath =
+  "mongodb+srv://Luke:dEpLpbGSlDtMm9By@cluster0.tiums.mongodb.net/Testing?retryWrites=true&w=majority";
 
 module.exports = {
   clientID: clientID,
@@ -59,4 +67,11 @@ module.exports = {
   highStaffChannel: highStaffChannel,
   punishmentChannel: punishmentChannel,
   mainStaffrole: mainStaffrole,
+  levelonerole: levelonerole,
+  levelfiverole: leveltenrole,
+  leveltenrole: leveltenrole,
+  leveltwentyrole: leveltwentyrole,
+  levelthirtyrole: levelthirtyrole,
+  levelfortyrole: levelfortyrole,
+  levelfiftyrole: levelfiftyrole,
 };

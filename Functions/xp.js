@@ -1,6 +1,8 @@
 const canvacord = require("canvacord");
 const expModel = require("../Model/exp.js");
 const { AttachmentBuilder } = require("discord.js");
+const constantsfile = require("../Storage/constants.js");
+const constants = require("../Storage/constants.js");
 async function xp(message) {
   if (message.guild.id != "1040773239607140485") return;
 
@@ -9,6 +11,7 @@ async function xp(message) {
     memberID: message.author.id,
   });
   const randomNumber = Math.floor(Math.random() * 8) + 12;
+  const guild = await client.guilds.fetch(constantsfile.mainServerID);
   if (data) {
     x = data.xp + randomNumber;
     data.xp = x;
@@ -57,22 +60,22 @@ async function xp(message) {
             }
           });
           if (z == 5) {
-            let role = message.guild.roles.cache.find((r) => r.name.toLowerCase() === "level 5");
+            let role = guild.roles.cache.get(constantsfile.levelfiverole);
             message.member.roles.add(role);
           } else if (z == 10) {
-            let role = message.guild.roles.cache.find((r) => r.name.toLowerCase() === "level 10");
+            let role = guild.roles.cache.get(constantsfile.leveltenrole);
             message.member.roles.add(role);
           } else if (z == 20) {
-            let role = message.guild.roles.cache.find((r) => r.name.toLowerCase() === "level 20");
+            let role = guild.roles.cache.get(constantsfile.leveltwentyrole);
             message.member.roles.add(role);
           } else if (z == 30) {
-            let role = message.guild.roles.cache.find((r) => r.name.toLowerCase() === "level 30");
+            let role = guild.roles.cache.get(constantsfile.levelthirtyrole);
             message.member.roles.add(role);
           } else if (z == 40) {
-            let role = message.guild.roles.cache.find((r) => r.name.toLowerCase() === "level 40");
+            let role = guild.roles.cache.get(constantsfile.levelfortyrole);
             message.member.roles.add(role);
           } else if (z == 50) {
-            let role = message.guild.roles.cache.find((r) => r.name.toLowerCase() === "level 50");
+            let role = guild.roles.cache.get(constantsfile.levelfiftyrole);
             message.member.roles.add(role);
           }
         });
@@ -86,6 +89,8 @@ async function xp(message) {
       level: 0,
     });
     newExp.save();
+    let role = guild.roles.cache.get(constantsfile.levelonerole);
+    message.member.roles.add(role);
   }
 }
 
