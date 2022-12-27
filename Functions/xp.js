@@ -2,7 +2,6 @@ const canvacord = require("canvacord");
 const expModel = require("../Model/exp.js");
 const { AttachmentBuilder } = require("discord.js");
 const constantsfile = require("../Storage/constants.js");
-const constants = require("../Storage/constants.js");
 async function xp(message) {
   if (message.guild.id != "1040773239607140485") return;
 
@@ -11,7 +10,7 @@ async function xp(message) {
     memberID: message.author.id,
   });
   const randomNumber = Math.floor(Math.random() * 8) + 12;
-  const guild = await client.guilds.fetch(constantsfile.mainServerID);
+  const guild = await interaction.client.guilds.fetch(constantsfile.mainServerID);
   if (data) {
     x = data.xp + randomNumber;
     data.xp = x;

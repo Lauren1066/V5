@@ -1,4 +1,3 @@
-const { client } = require("../../index.js");
 const constantFile = require("../../Storage/constants.js");
 const errorModel = require("../../Model/errors.js");
 
