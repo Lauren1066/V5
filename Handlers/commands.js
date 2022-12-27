@@ -5,13 +5,15 @@ function loadCommands(client) {
   const commandsPath = path.join(__dirname, "../Commands");
   const commandsFolder = fs.readdirSync("./Commands");
   for (const folder of commandsFolder) {
-    const commandFiles = fs.readdirSync(`./Commands/${folder}`).filter((file) => file.endsWith(".js"));
+    const commandFiles = fs
+      .readdirSync(`./Commands/${folder}`)
+      .filter((file) => file.endsWith(".js"));
 
     for (const file of commandFiles) {
       const commandFile = require(`../Commands/${folder}/${file}`);
       const filePath = path.join(commandsPath, folder, file);
       const command = require(filePath);
-
+      // something
       client.commands.set(commandFile.data.name, command);
     }
   }
