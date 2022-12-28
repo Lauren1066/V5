@@ -1,5 +1,5 @@
 const constantFile = require("../Storage/constants.js");
-const errorModel = require("../Storage/constants.js");
+const errorModel = require("../Model/errors.js");
 
 async function errorFunc(error) {
   const errorData = await errorModel.findOne({});

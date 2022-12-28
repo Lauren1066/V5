@@ -10,7 +10,7 @@ async function xp(message) {
     memberID: message.author.id,
   });
   const randomNumber = Math.floor(Math.random() * 8) + 12;
-  const guild = await interaction.client.guilds.fetch(constantsfile.mainServerID);
+  const guild = await message.client.guilds.fetch(constantsfile.mainServerID);
   if (data) {
     x = data.xp + randomNumber;
     data.xp = x;
