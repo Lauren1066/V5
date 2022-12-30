@@ -8,7 +8,6 @@ module.exports = {
     .setDescription("Update level roles.")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
-    interaction.channel.send("Trying to add roles...");
     var guild = interaction.client.guilds.cache.get(constantsFile.mainServerID);
     guild.members.cache.forEach(async (member) => {
       let memberId = member.id;
@@ -61,8 +60,8 @@ module.exports = {
         } else if (level >= 1) {
           member.roles.add(levelOne);
         }
-        interaction.reply({ content: `Roles added`, ephemeral: true });
       }
     });
+    interaction.reply({ content: `Roles added`, ephemeral: true });
   },
 };
