@@ -36,8 +36,7 @@ const levelthirtyrole = "1040830099290857512";
 const levelfortyrole = "1040854023034634242";
 const levelfiftyrole = "1040830102814081065";
 
-const mongoosePath =
-  "mongodb+srv://Luke:dEpLpbGSlDtMm9By@cluster0.tiums.mongodb.net/Testing?retryWrites=true&w=majority";
+const mongoosePath = "mongodb+srv://Luke:dEpLpbGSlDtMm9By@cluster0.tiums.mongodb.net/Testing?retryWrites=true&w=majority";
 
 module.exports = {
   clientID: clientID,
@@ -68,7 +67,7 @@ module.exports = {
   punishmentChannel: punishmentChannel,
   mainStaffrole: mainStaffrole,
   levelonerole: levelonerole,
-  levelfiverole: leveltenrole,
+  levelfiverole: levelfiverole,
   leveltenrole: leveltenrole,
   leveltwentyrole: leveltwentyrole,
   levelthirtyrole: levelthirtyrole,

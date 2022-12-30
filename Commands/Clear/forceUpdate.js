@@ -61,9 +61,7 @@ module.exports = {
         } else if (level >= 1) {
           member.roles.add(levelOne);
         }
-        interaction.channel.send(`Roles added to ${member.user.username}. They were level ${data.level}`);
-      } else if (!data || memberId == constantsFile.ownerID) {
-        interaction.channel.send(`No roles added to ${member.user.username}. They had no data.`);
+        interaction.reply({ content: `Roles added`, ephemeral: true });
       }
     });
   },
