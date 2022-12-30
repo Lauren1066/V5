@@ -38,7 +38,7 @@ module.exports = {
     }
 
     try {
-      user.send(`You have been banned from **After Hours** for **${banReason}**!`);
+      await user.send(`You have been banned from **After Hours** for **${banReason}**!`);
     } catch {
       punishmentChannel.send("I was not able to DM the user!");
     }
