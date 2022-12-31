@@ -18,7 +18,7 @@ module.exports = {
       if (data && memberId != constantsFile.ownerID) {
         let level = data.level;
         const levelFifty = guild.roles.cache.get("1040830102814081065");
-        const levelFourty = guild.roles.cache.get("1040854023034634242");
+        const levelForty = guild.roles.cache.get("1040854023034634242");
         const levelThirty = guild.roles.cache.get("1040830099290857512");
         const levelTwenty = guild.roles.cache.get("1040830095243358340");
         const levelTen = guild.roles.cache.get("1040830091191652362");
@@ -26,14 +26,14 @@ module.exports = {
         const levelOne = guild.roles.cache.get("1040830062133530676");
         if (level >= 50) {
           member.roles.add(levelFifty);
-          member.roles.add(levelFourty);
+          member.roles.add(levelForty);
           member.roles.add(levelThirty);
           member.roles.add(levelTwenty);
           member.roles.add(levelTen);
           member.roles.add(levelFive);
           member.roles.add(levelOne);
         } else if (level >= 40) {
-          member.roles.add(levelFourty);
+          member.roles.add(levelForty);
           member.roles.add(levelThirty);
           member.roles.add(levelTwenty);
           member.roles.add(levelTen);
