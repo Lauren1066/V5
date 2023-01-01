@@ -18,6 +18,12 @@ module.exports = {
     if (member.roles.cache.has(constantsFile.mainStaffrole) == false && member.bannable) {
       try {
         member.ban();
+        interaction.reply({ content: "User has been banned!", ephemeral: true });
+        try {
+          await user.send(`You have been banned from **After Hours** for **${banReason}**!`);
+        } catch {
+          punishmentChannel.send("I was not able to DM the user!");
+        }
       } catch {
         interaction.reply({ content: "I could not ban that user!", ephemeral: true });
         return;
@@ -25,7 +31,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor("FF0000")
         .setTitle(`${user.username} has been banned!`)
-        .addFields({ name: "Reason", value: banReason });
+        .addFields({ name: "Reason", value: banReason }, { name: "Moderator", value: interaction.user.username });
 
       punishmentChannel.send({ embeds: [embed] });
 
@@ -36,13 +42,5 @@ module.exports = {
     } else if (member.bannable == false) {
       interaction.reply({ content: "User is not bannable", ephemeral: true });
     }
-
-    try {
-      await user.send(`You have been banned from **After Hours** for **${banReason}**!`);
-    } catch {
-      punishmentChannel.send("I was not able to DM the user!");
-    }
-
-    interaction.reply({ content: "User has been banned!", ephemeral: true });
   },
 };
