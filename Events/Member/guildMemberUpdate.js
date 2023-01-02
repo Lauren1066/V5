@@ -9,9 +9,6 @@ module.exports = {
     const hadRole = oldMember.roles.cache.some((role) => role.id === "889258147259252816");
     const hasRole = newMember.roles.cache.some((role) => role.id === "889258147259252816");
 
-    console.log(hadRole);
-    console.log(hasRole);
-
     if (hadRole == false && hasRole == true && oldMember.id == newMember.id) {
       if (data) {
         await jrModModel.deleteMany({ memberID: newMember.id });

@@ -5,7 +5,6 @@ const constantsFile = require("../Storage/constants.js");
 async function check(staffCheckJob, client) {
   const next = staffCheckJob.nextDates(1);
   const month = next[0].month - 1;
-  console.log(next[0]);
   const date = new Date(next[0].year, month, next[0].day, next[0].hour, next[0].minute, next[0].second);
   var unixTimestamp = Math.floor(date.getTime() / 1000);
 
