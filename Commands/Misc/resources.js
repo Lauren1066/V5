@@ -12,6 +12,7 @@ module.exports = {
         .addChoices(
           { name: "Australia", value: "Australia" },
           { name: "Canada", value: "Canada" },
+          { name: "France", value: "France" },
           { name: "India", value: "India" },
           { name: "New Zealand", value: "NZ" },
           { name: "Portugal", value: "Portugal" },
@@ -57,9 +58,10 @@ module.exports = {
         The After Hours staff team takes mental health very seriously and if you need someone to talk to, please reach out. 
         A list of hotlines is available below as well.
         [therapyroute.com](https://www.therapyroute.com/article/suicide-hotlines-and-crisis-lines-in-the-united-kingdom)
-        [nhs.uk](https://www.nhs.uk//)`
+        [nhs.uk](https://www.nhs.uk/nhs-services/mental-health-services/get-urgent-help-for-mental-health/)
+        [samaritans.org](https://www.samaritans.org/)`
         )
-        .setFooter({ text: "Special thanks to ネGoldenネ#8782 for assistance with links" });
+        .setFooter({ text: "Special thanks to ネGoldenネ#8782 and Ayrton#8115 for assistance with links" });
       interaction.reply({ embeds: [embed] });
     } else if (country == "Canada") {
       const embed = new EmbedBuilder()
@@ -118,10 +120,24 @@ module.exports = {
         )
         .setFooter({ text: "Special thanks to ネGoldenネ#8782 for assistance with links" });
       interaction.reply({ embeds: [embed] });
+    } else if (country == "Bangladesh") {
+      const embed = new EmbedBuilder()
+        .setTitle("Bangladesh helplines")
+        .setDescription(
+          `If you are in immediate danger please call 999 instead of using a helpline. 
+        The After Hours staff team takes mental health very seriously and if you need someone to talk to, please reach out. 
+        A list of hotlines is available below as well.
+        [add.org.uk](https://add.org.uk/mental-health-bangladesh)`
+        )
+        .setFooter({ text: "Special thanks to Lance🔑#4823 for assistance with links" });
+      interaction.reply({ embeds: [embed] });
     } else if (country == "Other") {
-      interaction.reply(
-        "It seems we do not have hotlines for your country yet. Please reach out to a staff member who will help you find someone to talk with. If this is an emergency please call your local emergency services"
-      );
+      const embed = new EmbedBuilder()
+        .setDescription(
+          "It seems we do not have hotlines for your country yet. [Click here](https://findahelpline.com/) to try to find a website, otherwise please reach out to a staff member who will help you find someone to talk with. If this is an emergency please call your local emergency services."
+        )
+        .setFooter({ text: "Special thanks to =LLL=#0711 for assistance with links" });
+      interaction.reply({ embeds: [embed] });
     }
   },
 };
