@@ -30,7 +30,7 @@ async function xp(message) {
       try {
         expModel
           .find({
-            guildID: constantsFile.mainServerID,
+            guildID: constantsfile.mainServerID,
           })
           .sort({ level: -1, xp: -1 })
           .exec((err, res) => {
@@ -66,7 +66,7 @@ async function xp(message) {
       } catch {
         expModel
           .find({
-            guildID: constantsFile.mainServerID,
+            guildID: constantsfile.mainServerID,
           })
           .sort({ level: -1, xp: -1 })
           .exec((err, res) => {
@@ -137,7 +137,7 @@ async function xp(message) {
       const user = message.author;
       expModel
         .find({
-          guildID: constantsFile.mainServerID,
+          guildID: constantsfile.mainServerID,
         })
         .sort({ level: -1, xp: -1 })
         .exec((err, res) => {

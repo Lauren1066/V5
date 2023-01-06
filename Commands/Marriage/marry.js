@@ -16,7 +16,7 @@ module.exports = {
     if (!dataOne && !dataTwo && !dataThree && !dataFour && interaction.user.id != user.id) {
       const newData = new marriageModel({ users: [{ userOne: interaction.user.id, userTwo: user.id }], proposedAt: proposalDate, accepted: false });
       newData.save();
-      interaction.reply(`You have proposed to <@${user.id}>! Now you must wait for them to accept/deny your proposal.`);
+      interaction.reply(`<@${user.id}>, you have been proposed to by <@${interaction.user.id}>! Use /decidemarry to accept/deny the proposal.`);
     } else if (dataOne) {
       interaction.reply("You already have proposed to someone else!");
     } else if (dataTwo) {
