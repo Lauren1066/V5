@@ -1,17 +1,22 @@
 const canvacord = require("canvacord");
+const rn = require("random-number");
 const expModel = require("../Model/exp.js");
 const { AttachmentBuilder } = require("discord.js");
 const constantsfile = require("../Storage/constants.js");
 const backgroundModel = require("../Model/backgrounds.js");
 async function xp(message) {
-  if (message.guild.id != constantsfile.mainServerID || message.guildID != constantsfile.staffServerID) return;
-
   let data = await expModel.findOne({
     guildID: message.guild.id,
     memberID: message.author.id,
   });
   let backgroundData = await backgroundModel.findOne({ memberID: message });
-  const randomNumber = Math.floor(Math.random() * 8) + 12;
+  var options = {
+    min: 8,
+    max: 12,
+    integer: true,
+  };
+  rn(options);
+  const randomNumber = await rn(options);
   const guild = await message.client.guilds.fetch(constantsfile.mainServerID);
   if (data && backgroundData) {
     x = data.xp + randomNumber;

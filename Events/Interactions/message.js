@@ -12,9 +12,10 @@ module.exports = {
     if (message.member.roles.cache.has(constantsFile.mainStaffrole) == false) {
       autoresponse(message);
     }
-    xp(message);
 
     if (message.guild.id == constantsFile.mainServerID || message.guild.id == constantsFile.staffServerID) {
+      xp(message);
+
       const data = await messageModel.findOne({
         memberID: message.author.id,
       });
