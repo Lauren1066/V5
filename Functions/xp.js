@@ -11,8 +11,8 @@ async function xp(message) {
   });
   let backgroundData = await backgroundModel.findOne({ memberID: message });
   var options = {
-    min: 8,
-    max: 12,
+    min: constantsfile.minXP,
+    max: constantsfile.maxXp,
     integer: true,
   };
   rn(options);

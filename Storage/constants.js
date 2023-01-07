@@ -1,10 +1,13 @@
+// User IDS
 const clientID = "1012220507434786817";
 const ownerID = "693511698912641105";
 
+// Server IDS
 const mainServerID = "1040773239607140485";
 const staffServerID = "888922290371330058";
 const testServerID = "980559928911618090";
 
+// Channel IDS
 const eventChannelID = "1040841716086874133";
 const statusChannel = "1050225807676682331";
 const mainGeneralChat = "1040773240135626764";
@@ -16,8 +19,10 @@ const mainBotChannel = "1040786220487286825";
 const highStaffChannel = "1054150224387526746";
 const punishmentChannel = "1040794645883539516";
 
+// Category IDS
 const academicCategory = "1040785886264172564";
 
+// Role IDS
 const deadChatRole = "1040837069834043442";
 const eventPingRole = "1040837359933063289";
 const giveawayPingRole = "1040838322890752034";
@@ -36,6 +41,11 @@ const levelthirtyrole = "1040830099290857512";
 const levelfortyrole = "1040854023034634242";
 const levelfiftyrole = "1040830102814081065";
 
+// XP parameters
+const minXP = 8;
+const maxXp = 12;
+
+// Mongo Login
 const mongoosePath = "mongodb+srv://Luke:dEpLpbGSlDtMm9By@cluster0.tiums.mongodb.net/Testing?retryWrites=true&w=majority";
 
 module.exports = {
@@ -73,4 +83,6 @@ module.exports = {
   levelthirtyrole: levelthirtyrole,
   levelfortyrole: levelfortyrole,
   levelfiftyrole: levelfiftyrole,
+  minXP: minXP,
+  maxXp: maxXp,
 };
