@@ -9,7 +9,9 @@ module.exports = {
   async execute(message) {
     if (message.author.bot) return;
 
-    autoresponse(message);
+    if (message.member.roles.cache.has(constantsFile.mainStaffrole) == false) {
+      autoresponse(message);
+    }
     xp(message);
 
     if (message.guild.id == constantsFile.mainServerID || message.guild.id == constantsFile.staffServerID) {

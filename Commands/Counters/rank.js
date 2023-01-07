@@ -26,9 +26,9 @@ module.exports = {
             guildID: constantsFile.mainServerID,
           })
           .sort({ level: -1, xp: -1 })
-          .exec((err, res) => {
+          .exec(async (err, res) => {
             i = 1;
-            res.forEach((member) => {
+            await res.forEach((member) => {
               if (member.memberID == data.memberID) {
                 const xpNeeded = 5 * Math.pow(data.level, 2) + 60 * data.level + 100;
                 const rank = new canvacord.Rank()

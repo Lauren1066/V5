@@ -4,7 +4,7 @@ const { AttachmentBuilder } = require("discord.js");
 const constantsfile = require("../Storage/constants.js");
 const backgroundModel = require("../Model/backgrounds.js");
 async function xp(message) {
-  if (message.guild.id != "1040773239607140485") return;
+  if (message.guild.id != constantsfile.mainServerID || message.guildID != constantsfile.staffServerID) return;
 
   let data = await expModel.findOne({
     guildID: message.guild.id,
