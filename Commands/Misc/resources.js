@@ -106,7 +106,7 @@ module.exports = {
         [mentalhealth.org.nz](https://mentalhealth.org.nz/helplines)
         [lifeline.org.nz](https://www.lifeline.org.nz/)`
         )
-        .setFooter({ text: "Special thanks to ネGoldenネ#8782 for assistance with links" });
+        .setFooter({ text: "Special thanks to ネGoldenネ#8782 bunnie.#8448 and for assistance with links" });
       interaction.reply({ embeds: [embed] });
     } else if (country == "Romania") {
       const embed = new EmbedBuilder()

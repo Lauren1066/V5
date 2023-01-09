@@ -5,16 +5,23 @@ const { AttachmentBuilder } = require("discord.js");
 const constantsfile = require("../Storage/constants.js");
 const backgroundModel = require("../Model/backgrounds.js");
 async function xp(message) {
+  console.log(message.author.username);
+
   let data = await expModel.findOne({
-    guildID: message.guild.id,
+    guildID: constantsfile.mainServerID,
     memberID: message.author.id,
   });
+
   let backgroundData = await backgroundModel.findOne({ memberID: message });
   var options = {
     min: constantsfile.minXP,
     max: constantsfile.maxXp,
     integer: true,
   };
+
+  console.log(data);
+  console.log(backgroundData);
+
   rn(options);
   const randomNumber = await rn(options);
   const guild = await message.client.guilds.fetch(constantsfile.mainServerID);
@@ -134,6 +141,7 @@ async function xp(message) {
     var level = data.level;
     var xp = data.xp;
     var xpNeeded = 5 * Math.pow(data.level, 2) + 60 * data.level + 100;
+
     if (xpNeeded < xp) {
       z = level + 1;
       data.level = z;
@@ -177,9 +185,10 @@ async function xp(message) {
           });
         });
     }
+    data.save();
   } else {
     let newExp = new expModel({
-      guildID: message.guild.id,
+      guildID: constantsfile.mainServerID,
       xp: randomNumber,
       memberID: message.author.id,
       level: 0,

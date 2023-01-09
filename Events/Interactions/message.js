@@ -13,9 +13,11 @@ module.exports = {
       autoresponse(message);
     }
 
-    if (message.guild.id == constantsFile.mainServerID || message.guild.id == constantsFile.staffServerID) {
+    if (message.guild.id == constantsFile.mainServerID) {
       xp(message);
+    }
 
+    if (message.guild.id == constantsFile.mainServerID || message.guild.id == constantsFile.staffServerID) {
       const data = await messageModel.findOne({
         memberID: message.author.id,
       });
