@@ -17,13 +17,13 @@ module.exports = {
 
     if (member.roles.cache.has(constantsFile.mainStaffrole) == false && member.bannable) {
       try {
+        await user.send(`You have been banned from **After Hours** for **${banReason}**!`);
+      } catch {
+        punishmentChannel.send("I was not able to DM the user!");
+      }
+      try {
         member.ban();
         interaction.reply({ content: "User has been banned!", ephemeral: true });
-        try {
-          await user.send(`You have been banned from **After Hours** for **${banReason}**!`);
-        } catch {
-          punishmentChannel.send("I was not able to DM the user!");
-        }
       } catch {
         interaction.reply({ content: "I could not ban that user!", ephemeral: true });
         return;

@@ -5,8 +5,6 @@ const { AttachmentBuilder } = require("discord.js");
 const constantsfile = require("../Storage/constants.js");
 const backgroundModel = require("../Model/backgrounds.js");
 async function xp(message) {
-  console.log(message.author.username);
-
   let data = await expModel.findOne({
     guildID: constantsfile.mainServerID,
     memberID: message.author.id,
@@ -19,15 +17,13 @@ async function xp(message) {
     integer: true,
   };
 
-  console.log(data);
-  console.log(backgroundData);
-
   rn(options);
   const randomNumber = await rn(options);
   const guild = await message.client.guilds.fetch(constantsfile.mainServerID);
   if (data && backgroundData) {
     x = data.xp + randomNumber;
     data.xp = x;
+    console.log(`${message.author.username} recieved ${randomNumber} xp and now has a total of ${x}`);
 
     var level = data.level;
     var xp = data.xp;
@@ -66,7 +62,8 @@ async function xp(message) {
                   .setDiscriminator(user.discriminator, backgroundData.color);
                 rank.build().then((data) => {
                   const attachment = new AttachmentBuilder(data, "RankCard.png");
-                  interaction.reply({
+                  message.channel.send({
+                    content: `${user.username} has leveled up`,
                     files: [attachment],
                   });
                 });
@@ -102,7 +99,7 @@ async function xp(message) {
                   .setDiscriminator(user.discriminator, "#ffffff");
                 rank.build().then((data) => {
                   const attachment = new AttachmentBuilder(data, "RankCard.png");
-                  interaction.reply({
+                  message.channel.send({
                     content: "I was unable to use your custom background! Please double check the link",
                     files: [attachment],
                   });
@@ -137,6 +134,7 @@ async function xp(message) {
   } else if (!backgroundData && data) {
     x = data.xp + randomNumber;
     data.xp = x;
+    console.log(`${message.author.username} recieved ${randomNumber} xp and now has a total of ${x}`);
 
     var level = data.level;
     var xp = data.xp;
@@ -174,8 +172,8 @@ async function xp(message) {
                 .setDiscriminator(user.discriminator, "#ffffff");
               rank.build().then((data) => {
                 const attachment = new AttachmentBuilder(data, "RankCard.png");
-                interaction.reply({
-                  content: "I was unable to use your custom background! Please double check the link",
+                message.channel.send({
+                  content: `${user.username} has leveled up`,
                   files: [attachment],
                 });
               });

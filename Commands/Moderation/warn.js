@@ -39,7 +39,11 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor("FF0000")
       .setTitle(`${user.username} has been warned!`)
-      .addFields({ name: "Reason", value: warnReason }, { name: "Warns", value: `${warnAmount}` });
+      .addFields(
+        { name: "Reason", value: warnReason },
+        { name: "Warns", value: `${warnAmount}` },
+        { name: "Moderator:", value: interaction.user.username }
+      );
 
     punishmentChannel.send({ embeds: [embed] });
 
