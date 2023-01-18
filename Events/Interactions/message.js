@@ -9,7 +9,7 @@ module.exports = {
   async execute(message) {
     if (message.author.bot) return;
 
-    if (message.member.roles.cache.has(constantsFile.mainStaffrole) == false) {
+    if (message.member.roles.cache.has(constantsFile.mainStaffrole) == false && message.member.roles.cache.has(constantsFile.canReadRole) == false) {
       autoresponse(message);
     }
 

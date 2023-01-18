@@ -3,6 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder().setName("end").setDescription("Send this after you finish helping someone!"),
   async execute(interaction) {
+    await interaction.deferReply();
+
     const embed = new EmbedBuilder()
       .setFooter({
         text: `Requested by ${interaction.user.username}`,
@@ -27,9 +29,9 @@ module.exports = {
           value: "To ping a helper please do /helper. Then select the subject you need from in the menu.",
         }
       );
-    interaction.reply({
+    interaction.editReply({
+      content: "``` ```",
       embeds: [embed],
     });
-    interaction.channel.send("``` ```");
   },
 };

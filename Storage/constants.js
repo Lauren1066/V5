@@ -23,16 +23,24 @@ const punishmentChannel = "1040794645883539516";
 const academicCategory = "1040785886264172564";
 
 // Role IDS
+
+// Ping Roles
 const deadChatRole = "1040837069834043442";
 const eventPingRole = "1040837359933063289";
 const giveawayPingRole = "1040838322890752034";
 const journalPingRole = "1040838589031911486";
 const questionPingRole = "1040839413242003466";
 const wordPingRole = "1040841007580856420";
+const memePingRole = "1063667481006321664";
 const announcementPings = "1046503072500813914";
+
+// Misc Roles
 const noCooldownRole = "1040834838690795560";
 const retiredStaffRole = "1046652860600942654";
 const mainStaffrole = "1040788165440577606";
+const canReadRole = "1064701602688159804";
+
+// Level Roles
 const levelonerole = "1040830062133530676";
 const levelfiverole = "1040830087307731005";
 const leveltenrole = "1040830091191652362";
@@ -85,4 +93,6 @@ module.exports = {
   levelfiftyrole: levelfiftyrole,
   minXP: minXP,
   maxXp: maxXp,
+  memePingRole: memePingRole,
+  canReadRole: canReadRole,
 };

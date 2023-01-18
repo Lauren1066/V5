@@ -6,6 +6,7 @@
     "fs": "^0.0.1-security",
     "is-hexcolor": "^1.0.0",
     "mongoose": "^6.8.0",
+    "node-twitch": "^0.5.0",
     "random-number": "^0.0.9",
     "randomatic": "^3.1.1",
     "rest": "^2.0.0"

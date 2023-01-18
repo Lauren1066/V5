@@ -12,7 +12,7 @@ module.exports = {
     const guild = client.guilds.cache.get(constantsFile.mainServerID);
     const channel = guild.channels.cache.get(channelID);
     const embed = new EmbedBuilder().setColor("#8ef1ec").addFields({ name: `Suggestion from ${interaction.user.username}`, value: suggestion });
-    const suggestMsg = await channel.send({ embeds: [embed] });
+    const suggestMsg = await channel.send({ content: "<@&1065087596285411429>", embeds: [embed] });
     suggestMsg.react("👍");
     suggestMsg.react("👎");
     interaction.reply(`Suggestion sent to <#${channelID}>!`);
