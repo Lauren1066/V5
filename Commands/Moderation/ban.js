@@ -9,6 +9,8 @@ module.exports = {
     .addUserOption((option) => option.setName("user").setDescription("The user to ban").setRequired(true))
     .addStringOption((option) => option.setName("reason").setDescription("The reason for warning them").setRequired(true)),
   async execute(interaction) {
+    await interaction.deferReply({ ephemeral: true });
+
     const user = interaction.options.getUser("user");
     const banReason = interaction.options.getString("reason");
     const guild = await interaction.client.guilds.fetch(constantsFile.mainServerID);
@@ -23,9 +25,9 @@ module.exports = {
       }
       try {
         member.ban();
-        interaction.reply({ content: "User has been banned!", ephemeral: true });
+        interaction.editReply({ content: "User has been banned!", ephemeral: true });
       } catch {
-        interaction.reply({ content: "I could not ban that user!", ephemeral: true });
+        interaction.editReply({ content: "I could not ban that user!", ephemeral: true });
         return;
       }
       const embed = new EmbedBuilder()
@@ -35,12 +37,12 @@ module.exports = {
 
       punishmentChannel.send({ embeds: [embed] });
 
-      interaction.reply({ content: "User has been banned!", ephemeral: true });
+      interaction.editReply({ content: "User has been banned!", ephemeral: true });
     } else if (member.roles.cache.has(constantsFile.mainStaffrole) == true) {
-      interaction.reply("You can't ban a staff member!");
+      interaction.editReply("You can't ban a staff member!");
       return;
     } else if (member.bannable == false) {
-      interaction.reply({ content: "User is not bannable", ephemeral: true });
+      interaction.editReply({ content: "User is not bannable", ephemeral: true });
     }
   },
 };
