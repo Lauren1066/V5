@@ -10,12 +10,12 @@ module.exports = {
   async execute(member) {
     console.log(`${member.id} has left the server`);
     if (member.guild.id == "1040773239607140485") {
-      messageModel.deleteMany({ memberID: member.id });
-      expModel.deleteMany({ memberID: member.id });
-      repCooldown.deleteMany({ memberID: member.id });
-      helperCooldown.deleteMany({ memberID: member.id });
+      await messageModel.findOneAndDelete({ memberID: member.id });
+      await expModel.findOneAndDelete({ memberID: member.id });
+      await repCooldown.findOneAndDelete({ memberID: member.id });
+      await helperCooldown.findOneAndDelete({ memberID: member.id });
     } else if (member.guild.id == "888922290371330058") {
-      codesModel.deleteMany({ memberID: member.id });
+      await codesModel.findOneAndDelete({ memberID: member.id });
     }
   },
 };
