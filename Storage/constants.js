@@ -19,7 +19,7 @@ const mainBotChannel = "1040786220487286825";
 const highStaffChannel = "1054150224387526746";
 const punishmentChannel = "1040794645883539516";
 const breakRequestChannel = "1067626214623293551";
-const breakLogsChannel = "939957177941114930";
+const breakLogsChannel = "1067633573215076392";
 
 // Category IDS
 const academicCategory = "1040785886264172564";

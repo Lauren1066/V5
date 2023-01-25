@@ -9,6 +9,7 @@ module.exports = {
   once: false,
   async execute(member) {
     console.log(`${member.id} has left the server`);
+    console.log(member.guild.id);
     if (member.guild.id == "1040773239607140485") {
       await messageModel.findOneAndDelete({ memberID: member.id });
       await expModel.findOneAndDelete({ memberID: member.id });

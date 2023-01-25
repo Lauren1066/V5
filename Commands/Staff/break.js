@@ -20,6 +20,13 @@ module.exports = {
       const breakLogsChannel = await guild.channels.fetch(constantsFile.breakLogsChannel);
       if (decision == true) {
         var stringDecision = "accepted";
+        const breakMember = await guild.members.fetch(id);
+        if (breakMember) {
+          breakMember.roles.add("889258906797371402");
+        } else {
+          interaction.reply("I can't seem to find that user!");
+          return;
+        }
       } else {
         var stringDecision = "denied";
       }
