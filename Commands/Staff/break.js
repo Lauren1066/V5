@@ -8,8 +8,8 @@ module.exports = {
     .setDescription("Decide on a break!")
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addStringOption((option) => option.setName("id").setDescription("The id of the user").setRequired(true))
-    .addStringOption((option) => option.setName("reason").setDescription("The reason for your decision"))
-    .addBooleanOption((option) => option.setName("accept").setDescription("Accept (true) or Deny (false) the request").setRequired(true)),
+    .addBooleanOption((option) => option.setName("accept").setDescription("Accept (true) or Deny (false) the request").setRequired(true))
+    .addStringOption((option) => option.setName("reason").setDescription("The reason for your decision")),
   async execute(interaction) {
     const guild = await interaction.client.guilds.fetch(constantsFile.staffServerID);
     if (interaction.guild.id === guild.id) {
