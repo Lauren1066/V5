@@ -19,6 +19,7 @@ module.exports = {
           { name: "History", value: "History" },
           { name: "Spanish", value: "Spanish" },
           { name: "French", value: "French" },
+          { name: "Mandarin", value: "Mandarin" },
           { name: "Programming", value: "Programming" },
           { name: "Technology", value: "Technology" },
           { name: "Public Speaking", value: "Public" }
