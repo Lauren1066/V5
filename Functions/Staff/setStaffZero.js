@@ -1,5 +1,5 @@
-const messageModel = require("../Model/messages.js");
-const constantsFile = require("../Storage/constants.js");
+const messageModel = require("../../Model/messages.js");
+const constantsFile = require("../../Storage/constants.js");
 
 async function setstaffzero(client) {
   const guild = client.guilds.cache.get(constantsFile.staffServerID);

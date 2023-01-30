@@ -1,12 +1,11 @@
 const { ActivityType } = require("discord.js");
 const constantFile = require("../../Storage/constants.js");
 const mongoose = require("mongoose");
-const { messageLB } = require("../../Functions/messageLB.js");
-const { check } = require("../../Functions/check.js");
-const { setstaffzero } = require("../../Functions/setStaffZero.js");
-const { staffCheck } = require("../../Functions/staffCheck.js");
+const { messageLB } = require("../../Functions/Messages/messageLB.js");
+const { check } = require("../../Functions/Staff/check.js");
+const { setstaffzero } = require("../../Functions/Staff/setStaffZero.js");
+const { staffCheck } = require("../../Functions/Staff/staffCheck.js");
 const CronJob = require("cron").CronJob;
-const TwitchAPI = require("node-twitch").default;
 
 module.exports = {
   name: "ready",
@@ -66,11 +65,5 @@ module.exports = {
       true,
       "America/New_York"
     );
-
-    // Set up Twitch
-    const twitch = new TwitchAPI({
-      client_id: config.twitch.AppClientID,
-      client_secret: config.twitch.AppSecretToken,
-    });
   },
 };

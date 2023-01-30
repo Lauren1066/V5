@@ -1,5 +1,5 @@
-const { xp } = require("../../Functions/xp.js");
-const { autoresponse } = require("../../Functions/autoresponse.js");
+const { xp } = require("../../Functions/Levels/xp.js");
+const { autoresponse } = require("../../Functions/Messages/autoresponse.js");
 const constantsFile = require("../../Storage/constants.js");
 const messageModel = require("../../Model/messages.js");
 

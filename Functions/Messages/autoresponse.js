@@ -1,7 +1,7 @@
 async function autoresponse(message) {
-  const constantsFile = require("../Storage/constants.js");
+  const constantsFile = require("../../Storage/constants.js");
   const permissions = message.channel.permissionsFor(message.client.user);
-  const respondModel = require("../Model/replies");
+  const respondModel = require("../../Model/replies");
   const responses = await respondModel.find({});
   if (
     permissions.has("AttachFiles") &&

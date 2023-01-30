@@ -1,9 +1,9 @@
 const canvacord = require("canvacord");
 const rn = require("random-number");
-const expModel = require("../Model/exp.js");
+const expModel = require("../../Model/exp.js");
 const { AttachmentBuilder } = require("discord.js");
-const constantsfile = require("../Storage/constants.js");
-const backgroundModel = require("../Model/backgrounds.js");
+const constantsfile = require("../../Storage/constants.js");
+const backgroundModel = require("../../Model/backgrounds.js");
 async function xp(message) {
   let data = await expModel.findOne({
     guildID: constantsfile.mainServerID,
@@ -111,22 +111,22 @@ async function xp(message) {
           });
       }
       if (z == 5) {
-        let role = guild.roles.cache.get(constantsfile.levelfiverole);
+        let role = await guild.roles.cache.fetch(constantsfile.levelfiverole);
         message.member.roles.add(role);
       } else if (z == 10) {
-        let role = guild.roles.cache.get(constantsfile.leveltenrole);
+        let role = await guild.roles.cache.fetch(constantsfile.leveltenrole);
         message.member.roles.add(role);
       } else if (z == 20) {
-        let role = guild.roles.cache.get(constantsfile.leveltwentyrole);
+        let role = await guild.roles.cache.fetch(constantsfile.leveltwentyrole);
         message.member.roles.add(role);
       } else if (z == 30) {
-        let role = guild.roles.cache.get(constantsfile.levelthirtyrole);
+        let role = await guild.roles.cache.fetch(constantsfile.levelthirtyrole);
         message.member.roles.add(role);
       } else if (z == 40) {
-        let role = guild.roles.cache.get(constantsfile.levelfortyrole);
+        let role = await guild.roles.cache.fetch(constantsfile.levelfortyrole);
         message.member.roles.add(role);
       } else if (z == 50) {
-        let role = guild.roles.cache.get(constantsfile.levelfiftyrole);
+        let role = await guild.roles.cache.fetch(constantsfile.levelfiftyrole);
         message.member.roles.add(role);
       }
     }
@@ -192,7 +192,7 @@ async function xp(message) {
       level: 0,
     });
     newExp.save();
-    let role = guild.roles.cache.get(constantsfile.levelonerole);
+    let role = await guild.roles.cache.fetch(constantsfile.levelonerole);
     message.member.roles.add(role);
   }
 }

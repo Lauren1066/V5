@@ -1,6 +1,6 @@
-const messageModel = require("../Model/messages.js");
+const messageModel = require("../../Model/messages.js");
 const { EmbedBuilder } = require("discord.js");
-const constantsFile = require("../Storage/constants.js");
+const constantsFile = require("../../Storage/constants.js");
 
 async function check(staffCheckJob, client) {
   const next = staffCheckJob.nextDates(1);
