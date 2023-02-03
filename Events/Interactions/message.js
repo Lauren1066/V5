@@ -2,6 +2,8 @@ const { xp } = require("../../Functions/Levels/xp.js");
 const { autoresponse } = require("../../Functions/Messages/autoresponse.js");
 const constantsFile = require("../../Storage/constants.js");
 const messageModel = require("../../Model/messages.js");
+const { modApplication } = require("../../Functions/Applications/mod.js");
+const applicationModel = require("../../Model/applications.js");
 
 module.exports = {
   name: "messageCreate",
@@ -9,27 +11,44 @@ module.exports = {
   async execute(message) {
     if (message.author.bot) return;
 
-    if (message.member.roles.cache.has(constantsFile.mainStaffrole) == false && message.member.roles.cache.has(constantsFile.canReadRole) == false) {
-      autoresponse(message);
+    // DMs
+    if (message.channel.type === 1) {
+      const applicationData = await applicationModel.findOne({ memberID: message.author.id });
+      if (message.content.includes("apply")) {
+        message.reply("What team would you like to apply for:\nMod\nEvents\nTutor");
+      } else if (message.content.toLowerCase().includes("mod") || applicationData) {
+        modApplication(message);
+      } else {
+        return;
+      }
     }
 
-    if (message.guild.id == constantsFile.mainServerID) {
-      xp(message);
-    }
+    if (message.channel.type === 0) {
+      if (
+        message.member.roles.cache.has(constantsFile.mainStaffrole) == false &&
+        message.member.roles.cache.has(constantsFile.canReadRole) == false
+      ) {
+        autoresponse(message);
+      }
 
-    if (message.guild.id == constantsFile.mainServerID || message.guild.id == constantsFile.staffServerID) {
-      const data = await messageModel.findOne({
-        memberID: message.author.id,
-      });
-      if (data) {
-        data.messages++;
-        data.save();
-      } else if (!data) {
-        let newData = new messageModel({
+      if (message.guild.id == constantsFile.mainServerID) {
+        xp(message);
+      }
+
+      if (message.guild.id == constantsFile.mainServerID || message.guild.id == constantsFile.staffServerID) {
+        const data = await messageModel.findOne({
           memberID: message.author.id,
-          messages: 1,
         });
-        newData.save();
+        if (data) {
+          data.messages++;
+          data.save();
+        } else if (!data) {
+          let newData = new messageModel({
+            memberID: message.author.id,
+            messages: 1,
+          });
+          newData.save();
+        }
       }
     }
   },

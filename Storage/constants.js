@@ -20,6 +20,7 @@ const highStaffChannel = "1054150224387526746";
 const punishmentChannel = "1040794645883539516";
 const breakRequestChannel = "1067626214623293551";
 const breakLogsChannel = "1067633573215076392";
+const applicationLogChannel = "913671047847485470";
 
 // Category IDS
 const academicCategory = "1040785886264172564";
@@ -35,6 +36,8 @@ const questionPingRole = "1040839413242003466";
 const wordPingRole = "1040841007580856420";
 const memePingRole = "1063667481006321664";
 const announcementPings = "1046503072500813914";
+const factPingRole = "1070973110553169960";
+const applicationPingRole = "889269957882437692";
 
 // Misc Roles
 const noCooldownRole = "1040834838690795560";
@@ -99,4 +102,7 @@ module.exports = {
   canReadRole: canReadRole,
   breakRequestChannel: breakRequestChannel,
   breakLogsChannel: breakLogsChannel,
+  applicationLogChannel: applicationLogChannel,
+  factPingRole: factPingRole,
+  applicationPingRole: applicationPingRole,
 };

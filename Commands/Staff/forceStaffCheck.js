@@ -5,7 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("forcestaffcheck")
     .setDescription("Check who needs more messages!")
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
   async execute(interaction) {
     await interaction.deferReply();
     const members = await messageModel.find().where("messages").lt(25);
