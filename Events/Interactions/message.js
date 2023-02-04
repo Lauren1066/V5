@@ -16,7 +16,7 @@ module.exports = {
       const applicationData = await applicationModel.findOne({ memberID: message.author.id });
       if (message.content.includes("apply")) {
         message.reply("What team would you like to apply for:\nMod\nEvents\nTutor");
-      } else if (message.content.toLowerCase().includes("mod") || applicationData) {
+      } else if (message.content.toLowerCase().includes("mod") || (applicationData && applicationData.type.toLowerCase() === "mod")) {
         modApplication(message);
       } else {
         return;

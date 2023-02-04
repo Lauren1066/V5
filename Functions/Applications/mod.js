@@ -22,7 +22,7 @@ async function modApplication(message) {
       "If someone was mini-modding what would you do?",
       "If someone is begging for higher roles or staff what would you do?",
     ];
-    const questionData = new applicationModel({ questions: questionArray, answers: [], memberID: message.author.id });
+    const questionData = new applicationModel({ questions: questionArray, answers: [], memberID: message.author.id, type: "mod" });
     questionData.save();
     message.channel.send(questionArray[0]);
   } else if (applicationData && applicationData.answers.length === 0) {
