@@ -24,7 +24,7 @@ async function eventmanagerApplication(message) {
       questions: questionArray,
       answers: [],
       memberID: message.author.id,
-      type: "eventmanager",
+      type: "events",
     });
     questionData.save();
     message.channel.send(questionArray[0]);
@@ -32,36 +32,20 @@ async function eventmanagerApplication(message) {
     applicationData.answers.push(message.content);
     applicationData.save();
     message.channel.send(applicationData.questions[1]);
-  } else if (
-    applicationData &&
-    applicationData.answers.length > 0 &&
-    applicationData.answers.length < applicationData.questions.length - 1
-  ) {
+  } else if (applicationData && applicationData.answers.length > 0 && applicationData.answers.length < applicationData.questions.length - 1) {
     applicationData.answers.push(message.content);
     applicationData.save();
-    message.channel.send(
-      applicationData.questions[applicationData.answers.length]
-    );
-  } else if (
-    applicationData.answers.length ==
-    applicationData.questions.length - 1
-  ) {
+    message.channel.send(applicationData.questions[applicationData.answers.length]);
+  } else if (applicationData.answers.length == applicationData.questions.length - 1) {
     applicationData.answers.push(message.content);
     applicationData.save();
     message.channel.send("Application done!");
-    const guild = await message.client.guilds.fetch(
-      constantsfile.staffServerID
-    );
-    const channel = await guild.channels.fetch(
-      constantsfile.applicationLogChannel
-    );
+    const guild = await message.client.guilds.fetch(constantsfile.staffServerID);
+    const channel = await guild.channels.fetch(constantsfile.applicationLogChannel);
     const embed = new EmbedBuilder()
       // Change title
       .setTitle("There's a new Event Manager application!")
-      .addFields(
-        { name: "Discord Name:", value: message.author.tag },
-        { name: "Discord ID:", value: message.author.id }
-      );
+      .addFields({ name: "Discord Name:", value: message.author.tag }, { name: "Discord ID:", value: message.author.id });
     i = 0;
     while (i < applicationData.questions.length) {
       embed.addFields({
