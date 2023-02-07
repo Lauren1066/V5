@@ -23,6 +23,9 @@ async function check(staffCheckJob, client) {
     } catch {}
     i++;
   }
-  announceChannel.send({ content: `Next staff update <t:${unixTimestamp}:R>\nStaff checks will be happening on Thursdays.`, embeds: [embed] });
+  announceChannel.send({
+    content: `<@&940084754403962912>\nNext staff update <t:${unixTimestamp}:R>\nStaff checks will be happening on Thursdays.`,
+    embeds: [embed],
+  });
 }
 module.exports = { check };
