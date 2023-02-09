@@ -70,14 +70,16 @@ async function xp(message) {
       memberID: message.author.id,
       level: 0,
     });
-    newExp.save();
+    await newExp.save();
+
+    const newLevelData = await expModel.findOne({ memberID: message.author.id });
     // Try to use their background
     try {
-      backgroundCard(levelData, backgroundData, message.author, expModel, message);
+      backgroundCard(newLevelData, backgroundData, message.author, expModel, message);
       // If it doesn't work
     } catch (error) {
       console.log(error);
-      card(levelData, message.author, expModel, message);
+      card(newLevelData, message.author, expModel, message);
       message.channel.send("Your custom card does not seem to be working!");
     }
   } else if (levelData && !backgroundData) {
@@ -116,10 +118,12 @@ async function xp(message) {
       memberID: message.author.id,
       level: 0,
     });
-    newExp.save();
+    await newExp.save();
+
+    const newLevelData = await expModel.findOne({ memberID: message.author.id });
 
     // Send their card (no background)
-    card(levelData, message.author, expModel, message);
+    card(newLevelData, message.author, expModel, message);
   }
 }
 

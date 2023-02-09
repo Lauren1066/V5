@@ -20,6 +20,9 @@ module.exports = {
       });
       if (message.content.toLowerCase().includes("apply")) {
         message.reply("What team would you like to apply for:\nMod\nEvents\nTutor");
+      } else if (message.content.toLowerCase() == "cancel" && applicationData && applicationData.answers.length < applicationData.questions.length) {
+        await applicationModel.findOneAndDelete({ memberID: message.author.id });
+        message.reply("Application cancelled!");
       } else if (message.content.toLowerCase().includes("mod") || (applicationData && applicationData.type.toLowerCase() === "mod")) {
         modApplication(message);
       } else if (message.content.toLowerCase().includes("tutor") || (applicationData && applicationData.type.toLowerCase() === "tutor")) {
