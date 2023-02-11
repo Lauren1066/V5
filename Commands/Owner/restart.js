@@ -4,11 +4,12 @@ module.exports = {
   data: new SlashCommandBuilder().setName("restart").setDescription("Restart the bot").setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     var request = require("request");
+    const apiKey = "ptlc_29ve5ypCP38L2dXffbTp0okKrGzlGhbEGdqnaRYlr4h";
     var options = {
       method: "POST",
       url: "https://control.sparkedhost.us/api/client/servers/36ad70ce/power?signal=restart",
       headers: {
-        Authorization: "ptlc_29ve5ypCP38L2dXffbTp0okKrGzlGhbEGdqnaRYlr4h",
+        Authorization: "Bearer " + apiKey,
         "Content-Type": "application/json",
         Accept: "application/json",
       },

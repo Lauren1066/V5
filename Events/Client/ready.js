@@ -6,6 +6,8 @@ const { check } = require("../../Functions/Staff/check.js");
 const { setstaffzero } = require("../../Functions/Staff/setStaffZero.js");
 const { staffCheck } = require("../../Functions/Staff/staffCheck.js");
 const CronJob = require("cron").CronJob;
+const breakModel = require("../../Model/breaks.js");
+const ms = require("ms");
 
 module.exports = {
   name: "ready",
@@ -65,5 +67,23 @@ module.exports = {
       true,
       "America/New_York"
     );
+
+    const checkBreaks = async function CheckBreaks() {
+      breakModel.find({}).exec((err, res) => {
+        i = 1;
+        res.forEach(async (breakData) => {
+          const parsedDuration = ms(breakData.duration);
+          const timeSince = breakData.startedAt - parsedDuration;
+          if (timeSince > 0) {
+            const staffGuild = await client.guilds.fetch(constantFile.staffServerID);
+            const breakRole = await staffGuild.roles.fetch("889258906797371402");
+            const member = await staffGuild.members.fetch(breakData.memberID);
+            await member.roles.remove(breakRole);
+          }
+        });
+      });
+    };
+
+    setInterval(checkBreaks, 60000);
   },
 };

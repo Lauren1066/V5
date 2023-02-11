@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
-const jrModModel = require("../../Model/jrMod.js");
+const breakModel = require("../../Model/breaks.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,6 +9,7 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addStringOption((option) => option.setName("id").setDescription("The id of the user").setRequired(true))
     .addBooleanOption((option) => option.setName("accept").setDescription("Accept (true) or Deny (false) the request").setRequired(true))
+    .addStringOption((option) => option.setName("duration").setDescription("The length of their break (5s, 5h, 5d, 5w)").setRequired(true))
     .addStringOption((option) => option.setName("reason").setDescription("The reason for your decision")),
   async execute(interaction) {
     const guild = await interaction.client.guilds.fetch(constantsFile.staffServerID);
@@ -16,6 +17,7 @@ module.exports = {
       var reason = interaction.options.getString("reason");
       const id = interaction.options.getString("id");
       const decision = interaction.options.getBoolean("accept");
+      const duration = interaction.options.getString("duration");
 
       const breakLogsChannel = await guild.channels.fetch(constantsFile.breakLogsChannel);
       if (decision == true) {
@@ -23,6 +25,8 @@ module.exports = {
         const breakMember = await guild.members.fetch(id);
         if (breakMember) {
           breakMember.roles.add("889258906797371402");
+          const newData = new breakModel({ memberID: id, duration: duration, startedAt: new Date() });
+          newData.save();
         } else {
           interaction.reply("I can't seem to find that user!");
           return;
