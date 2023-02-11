@@ -1,23 +1,25 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
+const axios = require("axios");
 module.exports = {
   data: new SlashCommandBuilder().setName("restart").setDescription("Restart the bot").setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
-    var request = require("request");
     const apiKey = "ptlc_29ve5ypCP38L2dXffbTp0okKrGzlGhbEGdqnaRYlr4h";
-    var options = {
-      method: "POST",
-      url: "https://control.sparkedhost.us/api/client/servers/36ad70ce/power?signal=restart",
-      headers: {
-        Authorization: "Bearer " + apiKey,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      formData: {},
-    };
-    request(options, function (error, response) {
-      if (error) throw new Error(error);
-      interaction.reply(response.body);
-    });
+    const url = "https://control.sparkedhost.us/api/client/servers/36ad70ce/power?signal=restart";
+
+    axios
+      .get(url, {
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+          Authorization: "Bearer " + apiKey,
+        },
+      })
+      .then(function (response) {
+        interaction.reply(response);
+      })
+      .catch(function (error) {
+        interaction.reply(error);
+      });
   },
 };
