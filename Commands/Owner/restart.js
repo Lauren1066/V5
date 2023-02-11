@@ -20,7 +20,7 @@ module.exports = {
         console.log(response);
       })
       .catch(function (error) {
-        console.log(`${error.data.data.status}: ${error.data.data.statusText}`);
+        console.log(`${error.code}`);
       });
   },
 };
