@@ -18,9 +18,13 @@ module.exports = {
     })
       .then(function (response) {
         console.log(`${response.status}: ${response.statusText}`);
+        if (response.status == 204) {
+          interaction.reply("Restarting!");
+        }
       })
       .catch(function (error) {
         console.log(`${error.code}`);
+        interaction.reply("An error occured!");
       });
   },
 };
