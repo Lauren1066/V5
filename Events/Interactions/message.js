@@ -5,7 +5,7 @@ const messageModel = require("../../Model/messages.js");
 const { modApplication } = require("../../Functions/Applications/mod.js");
 const { tutorApplication } = require("../../Functions/Applications/tutor.js");
 const { eventmanagerApplication } = require("../../Functions/Applications/eventmanager.js");
-const applicationModel = require("../../Model/applications.js");
+const applicationModel = require("../../Model/Staff/applications.js");
 
 module.exports = {
   name: "messageCreate",
