@@ -9,6 +9,7 @@ module.exports = {
 
     axios
       .get(url, {
+        method: "POST",
         headers: {
           Authorization: "Bearer " + apiKey,
           "Content-Type": "application/json",
