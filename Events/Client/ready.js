@@ -8,6 +8,7 @@ const { staffCheck } = require("../../Functions/Staff/staffCheck.js");
 const CronJob = require("cron").CronJob;
 const breakModel = require("../../Model/breaks.js");
 const ms = require("ms");
+client.config = require("../../Storage/config.json");
 
 module.exports = {
   name: "ready",
@@ -33,7 +34,7 @@ module.exports = {
     mongoose.set("strictQuery", true);
 
     // Connect to mongoose
-    await mongoose.connect(constantsFile.mongoosePath, {
+    await mongoose.connect(client.config.mongoosePath, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
