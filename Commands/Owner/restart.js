@@ -19,7 +19,7 @@ module.exports = {
         console.log(response);
       })
       .catch(function (error) {
-        interaction.reply(error);
+        console.log(error);
       });
   },
 };
