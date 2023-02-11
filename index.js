@@ -1,6 +1,5 @@
 const { Client, GatewayIntentBits, Collection, Partials } = require("discord.js");
 const { deploy } = require("./deploy.js");
-const { errorFunc } = require("./Functions/error.js");
 
 deploy();
 
@@ -26,7 +25,6 @@ client.commands = new Collection();
 client.config = require("./Storage/config.json");
 
 process.on("unhandledRejection", (error) => {
-  errorFunc(error);
   console.error("Unhandled promise rejection:", error);
 });
 
