@@ -9,7 +9,7 @@ const testServerID = "980559928911618090";
 
 // Channel IDS
 const eventChannelID = "1040841716086874133";
-const statusChannel = "1050225807676682331";
+const statusChannel = "1073861685682638890";
 const mainGeneralChat = "1040773240135626764";
 const getHelpChannel = "1040792832832716800";
 const staffLBChannel = "913664976181403698";
