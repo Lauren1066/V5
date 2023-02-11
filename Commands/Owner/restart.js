@@ -5,23 +5,22 @@ module.exports = {
   data: new SlashCommandBuilder().setName("restart").setDescription("Restart the bot").setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     const apiKey = "ptlc_29ve5ypCP38L2dXffbTp0okKrGzlGhbEGdqnaRYlr4h";
-    const url = "https://control.sparkedhost.us/api/client/servers/36ad70ce/power";
+    const url = "https://control.sparkedhost.us/api/client/servers/36ad70ce/power?signal=restart";
 
-    axios
-      .get(url, {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + apiKey,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        data: [{ signal: "restart" }],
-      })
+    axios({
+      method: "POST",
+      url: url,
+      headers: {
+        Authorization: "Bearer " + apiKey,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
       .then(function (response) {
         console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(`${error.data.data.status}: ${error.data.data.statusText}`);
       });
   },
 };
