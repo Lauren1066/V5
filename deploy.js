@@ -4,7 +4,7 @@ async function deploy() {
   const { REST } = require("@discordjs/rest");
   const { Routes } = require("discord.js");
   const { clientId, token } = require("./Storage/config.json");
-  const constantFile = require("./Storage/constants");
+  const constantsFile = require("./Storage/constants");
 
   const commands = [];
   const commandsPath = path.join(__dirname, "Commands");
@@ -22,10 +22,10 @@ async function deploy() {
   const rest = new REST({ version: "10" }).setToken(token);
 
   // Delete all commands
-  rest.get(Routes.applicationGuildCommands(clientId, constantFile.testServerID)).then((data) => {
+  rest.get(Routes.applicationGuildCommands(clientId, constantsFile.testServerID)).then((data) => {
     const promises = [];
     for (const command of data) {
-      const deleteUrl = `${Routes.applicationGuildCommands(clientId, constantFile.testServerID)}/${command.id}`;
+      const deleteUrl = `${Routes.applicationGuildCommands(clientId, constantsFile.testServerID)}/${command.id}`;
       promises.push(rest.delete(deleteUrl));
     }
     return Promise.all(promises);

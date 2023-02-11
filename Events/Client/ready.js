@@ -1,5 +1,5 @@
 const { ActivityType } = require("discord.js");
-const constantFile = require("../../Storage/constants.js");
+const constantsFile = require("../../Storage/constants.js");
 const mongoose = require("mongoose");
 const { messageLB } = require("../../Functions/Messages/messageLB.js");
 const { check } = require("../../Functions/Staff/check.js");
@@ -18,7 +18,7 @@ module.exports = {
 
     // Get channel and send a message saying the bot has started
     const timeStarted = Math.floor(new Date().getTime() / 1000);
-    client.channels.fetch(constantFile.statusChannel).then((channel) => {
+    client.channels.fetch(constantsFile.statusChannel).then((channel) => {
       channel.send(`Bot Started at <t:${timeStarted}>`);
     });
 
@@ -33,7 +33,7 @@ module.exports = {
     mongoose.set("strictQuery", true);
 
     // Connect to mongoose
-    await mongoose.connect(constantFile.mongoosePath, {
+    await mongoose.connect(constantsFile.mongoosePath, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -75,7 +75,7 @@ module.exports = {
           const parsedDuration = ms(breakData.duration);
           const timeSince = breakData.startedAt - parsedDuration;
           if (timeSince > 0) {
-            const staffGuild = await client.guilds.fetch(constantFile.staffServerID);
+            const staffGuild = await client.guilds.fetch(constantsFile.staffServerID);
             const breakRole = await staffGuild.roles.fetch("889258906797371402");
             const member = await staffGuild.members.fetch(breakData.memberID);
             await member.roles.remove(breakRole);
