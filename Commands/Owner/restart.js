@@ -10,10 +10,11 @@ module.exports = {
     axios
       .get(url, {
         headers: {
-          Accept: "application/json",
-          "content-type": "application/json",
           Authorization: "Bearer " + apiKey,
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
+        formData: {},
       })
       .then(function (response) {
         console.log(response);
