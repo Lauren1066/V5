@@ -1,4 +1,3 @@
-const constantsFile = require("../../Storage/constants.js");
 const jrModModel = require("../../Model/jrMod.js");
 
 module.exports = {

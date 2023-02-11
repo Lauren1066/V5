@@ -1,11 +1,11 @@
-const constantsfile = require("../../../Storage/constants.js");
+const constantsFile = require("../../../Storage/constants.js");
 const { AttachmentBuilder } = require("discord.js");
 const canvacord = require("canvacord");
 
 async function card(levelData, user, expModel, message) {
   expModel
     .find({
-      guildID: constantsfile.mainServerID,
+      guildID: constantsFile.mainServerID,
     })
     .sort({ level: -1, xp: -1 })
     .exec((err, res) => {

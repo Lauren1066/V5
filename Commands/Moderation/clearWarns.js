@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const warnModel = require("../../Model/warns.js");
 const constantsFile = require("../../Storage/constants.js");
 

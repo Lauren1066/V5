@@ -1,7 +1,7 @@
 // Require everything
 const rn = require("random-number");
 const expModel = require("../../Model/exp.js");
-const constantsfile = require("../../Storage/constants.js");
+const constantsFile = require("../../Storage/constants.js");
 const backgroundModel = require("../../Model/backgrounds.js");
 const { checkLevel } = require("./checkLevel.js");
 const { card } = require("./RankCards/card.js");
@@ -11,7 +11,7 @@ const { backgroundCard } = require("./RankCards/backgroundCard.js");
 async function xp(message) {
   // Find the data
   let levelData = await expModel.findOne({
-    guildID: constantsfile.mainServerID,
+    guildID: constantsFile.mainServerID,
     memberID: message.author.id,
   });
 
@@ -19,14 +19,14 @@ async function xp(message) {
 
   // Get the random XP amount
   var options = {
-    min: constantsfile.minXP,
-    max: constantsfile.maxXp,
+    min: constantsFile.minXP,
+    max: constantsFile.maxXp,
     integer: true,
   };
   const randomNumber = rn(options);
 
   // Get the main server
-  const guild = await message.client.guilds.fetch(constantsfile.mainServerID);
+  const guild = await message.client.guilds.fetch(constantsFile.mainServerID);
 
   if (levelData && backgroundData) {
     // Add to their xp and set it equal to their xp
@@ -65,7 +65,7 @@ async function xp(message) {
   } else if (!levelData && backgroundData) {
     // Add them to the database and save
     let newExp = new expModel({
-      guildID: constantsfile.mainServerID,
+      guildID: constantsFile.mainServerID,
       xp: randomNumber,
       memberID: message.author.id,
       level: 0,
@@ -113,7 +113,7 @@ async function xp(message) {
   } else if (!levelData && !backgroundData) {
     // Add them to  the database and save
     let newExp = new expModel({
-      guildID: constantsfile.mainServerID,
+      guildID: constantsFile.mainServerID,
       xp: randomNumber,
       memberID: message.author.id,
       level: 0,

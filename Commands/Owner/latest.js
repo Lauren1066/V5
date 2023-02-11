@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const constantsFile = require("../../Storage/constants.js");
 const errorModel = require("../../Model/errors.js");
 module.exports = {
   data: new SlashCommandBuilder()

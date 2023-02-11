@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const messageModel = require("../../Model/messages.js");
 const constantsFile = require("../../Storage/constants.js");
 module.exports = {

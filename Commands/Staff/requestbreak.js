@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
-const jrModModel = require("../../Model/jrMod.js");
 
 module.exports = {
   data: new SlashCommandBuilder()

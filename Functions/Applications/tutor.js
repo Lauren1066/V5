@@ -1,5 +1,5 @@
 const applicationModel = require("../../Model/applications.js");
-const constantsfile = require("../../Storage/constants.js");
+const constantsFile = require("../../Storage/constants.js");
 const { EmbedBuilder } = require("discord.js");
 
 async function tutorApplication(message) {
@@ -41,8 +41,8 @@ async function tutorApplication(message) {
     applicationData.answers.push(message.content);
     applicationData.save();
     message.channel.send("Application done!");
-    const guild = await message.client.guilds.fetch(constantsfile.staffServerID);
-    const channel = await guild.channels.fetch(constantsfile.applicationLogChannel);
+    const guild = await message.client.guilds.fetch(constantsFile.staffServerID);
+    const channel = await guild.channels.fetch(constantsFile.applicationLogChannel);
     const embed = new EmbedBuilder()
       // Change title
       .setTitle("There's a new tutor application!")
@@ -56,7 +56,7 @@ async function tutorApplication(message) {
       i++;
     }
     channel.send({
-      content: `<@&${constantsfile.applicationPingRole}>`,
+      content: `<@&${constantsFile.applicationPingRole}>`,
       embeds: [embed],
     });
   }

@@ -1,4 +1,3 @@
-const constantsFile = require("../../Storage/constants.js");
 const errorModel = require("../../Model/errors.js");
 
 module.exports = {
