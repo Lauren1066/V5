@@ -16,7 +16,7 @@ module.exports = {
         },
       })
       .then(function (response) {
-        interaction.reply(response);
+        console.log(response);
       })
       .catch(function (error) {
         interaction.reply(error);
