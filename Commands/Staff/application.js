@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
-const applicationsModel = require("../../Model/applications.js");
+const applicationsModel = require("../../Model/Staff/applications.js");
 
 module.exports = {
   data: new SlashCommandBuilder()

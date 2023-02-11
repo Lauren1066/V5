@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const marriageModel = require("../../Model/marriages.js");
+const marriageModel = require("../../Model/Family/marriages.js");
 
 module.exports = {
   data: new SlashCommandBuilder()

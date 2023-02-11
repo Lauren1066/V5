@@ -1,4 +1,4 @@
-const jrModModel = require("../../Model/jrMod.js");
+const jrModModel = require("../../Model/Staff/jrMod.js");
 
 module.exports = {
   name: "guildMemberUpdate",

@@ -1,4 +1,4 @@
-const applicationModel = require("../../Model/applications.js");
+const applicationModel = require("../../Model/Staff/applications.js");
 const constantsFile = require("../../Storage/constants.js");
 const { EmbedBuilder } = require("discord.js");
 

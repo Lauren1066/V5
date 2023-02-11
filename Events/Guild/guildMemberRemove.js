@@ -1,8 +1,8 @@
 const messageModel = require("../../Model/messages.js");
-const expModel = require("../../Model/exp.js");
+const expModel = require("../../Model/Levels/exp.js");
 const repCooldown = require("../../Model/Cooldowns/repCooldown.js");
 const helperCooldown = require("../../Model/Cooldowns/helperPing.js");
-const codesModel = require("../../Model/codes.js");
+const codesModel = require("../../Model/Staff/codes.js");
 
 module.exports = {
   name: "guildMemberRemove",

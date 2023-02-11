@@ -6,7 +6,7 @@ const { check } = require("../../Functions/Staff/check.js");
 const { setstaffzero } = require("../../Functions/Staff/setStaffZero.js");
 const { staffCheck } = require("../../Functions/Staff/staffCheck.js");
 const CronJob = require("cron").CronJob;
-const breakModel = require("../../Model/breaks.js");
+const breakModel = require("../../Model/Staff/breaks.js");
 const ms = require("ms");
 const config = require("../../Storage/config.json");
 

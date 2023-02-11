@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const canvacord = require("canvacord");
-const expModel = require("../../Model/exp.js");
+const expModel = require("../../Model/Levels/exp.js");
 const constantsFile = require("../../Storage/constants.js");
-const backgroundModel = require("../../Model/backgrounds.js");
+const backgroundModel = require("../../Model/Levels/backgrounds.js");
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -1,8 +1,8 @@
 // Require everything
 const rn = require("random-number");
-const expModel = require("../../Model/exp.js");
+const expModel = require("../../Model/Levels/exp.js");
 const constantsFile = require("../../Storage/constants.js");
-const backgroundModel = require("../../Model/backgrounds.js");
+const backgroundModel = require("../../Model/Levels/backgrounds.js");
 const { checkLevel } = require("./checkLevel.js");
 const { card } = require("./RankCards/card.js");
 const { backgroundCard } = require("./RankCards/backgroundCard.js");

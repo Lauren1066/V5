@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
-const backgroundModel = require("../../Model/backgrounds.js");
+const backgroundModel = require("../../Model/Levels/backgrounds.js");
 
 module.exports = {
   data: new SlashCommandBuilder()

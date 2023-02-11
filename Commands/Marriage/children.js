@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const adoptModel = require("../../Model/parents.js");
+const adoptModel = require("../../Model/Family/parents.js");
 const constantsFile = require("../../Storage/constants.js");
 
 module.exports = {

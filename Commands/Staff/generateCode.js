@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 var randomize = require("randomatic");
-const codeModel = require("../../Model/codes.js");
+const codeModel = require("../../Model/Staff/codes.js");
 const constantsFile = require("../../Storage/constants.js");
 
 module.exports = {

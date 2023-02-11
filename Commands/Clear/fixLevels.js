@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const expModel = require("../../Model/exp.js");
+const expModel = require("../../Model/Levels/exp.js");
 
 module.exports = {
   data: new SlashCommandBuilder().setName("update").setDescription("Fix the levels.").setDefaultMemberPermissions(PermissionFlagsBits.Administrator),

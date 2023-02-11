@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const adoptModel = require("../../Model/parents.js");
+const adoptModel = require("../../Model/Family/parents.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
