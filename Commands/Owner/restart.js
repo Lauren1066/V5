@@ -17,7 +17,7 @@ module.exports = {
       },
     })
       .then(function (response) {
-        console.log(response);
+        console.log(`${response.status}: ${response.statusText}`);
       })
       .catch(function (error) {
         console.log(`${error.code}`);
