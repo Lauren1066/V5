@@ -20,7 +20,7 @@ module.exports = {
         console.log(response);
       })
       .catch(function (error) {
-        console.log(error.body);
+        console.log(error);
       });
   },
 };
