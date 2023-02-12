@@ -22,7 +22,8 @@ module.exports = {
           { name: "Mandarin", value: "Mandarin" },
           { name: "Programming", value: "Programming" },
           { name: "Technology", value: "Technology" },
-          { name: "Public Speaking", value: "Public" }
+          { name: "Public Speaking", value: "Public" },
+          { name: "Music", value: "Music" }
         )
         .setRequired(true)
     ),
