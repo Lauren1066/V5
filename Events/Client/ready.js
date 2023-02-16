@@ -74,8 +74,10 @@ module.exports = {
         i = 1;
         res.forEach(async (breakData) => {
           const parsedDuration = ms(breakData.duration);
-          const timeSince = breakData.startedAt - parsedDuration;
-          if (timeSince > 0) {
+          const timeNow = new Date();
+          const timeSince = breakData.startedAt - timeNow;
+          console.log(timeSince);
+          if (timeSince > parsedDuration) {
             const staffGuild = await client.guilds.fetch(constantsFile.staffServerID);
             const breakRole = await staffGuild.roles.fetch("889258906797371402");
             const member = await staffGuild.members.fetch(breakData.memberID);
