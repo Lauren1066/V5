@@ -62,26 +62,6 @@ async function xp(message) {
     }
     // Save the updated data
     levelData.save();
-  } else if (!levelData && backgroundData) {
-    // Add them to the database and save
-    let newExp = new expModel({
-      guildID: constantsFile.mainServerID,
-      xp: randomNumber,
-      memberID: message.author.id,
-      level: 0,
-    });
-    await newExp.save();
-
-    const newLevelData = await expModel.findOne({ memberID: message.author.id });
-    // Try to use their background
-    try {
-      backgroundCard(newLevelData, backgroundData, message.author, expModel, message);
-      // If it doesn't work
-    } catch (error) {
-      console.log(error);
-      card(newLevelData, message.author, expModel, message);
-      message.channel.send("Your custom card does not seem to be working!");
-    }
   } else if (levelData && !backgroundData) {
     // Add to their xp and set it equal to their xp
     x = levelData.xp + randomNumber;
@@ -110,7 +90,7 @@ async function xp(message) {
     }
     // Save all updated data
     levelData.save();
-  } else if (!levelData && !backgroundData) {
+  } else if (!levelData) {
     // Add them to  the database and save
     let newExp = new expModel({
       guildID: constantsFile.mainServerID,
@@ -119,11 +99,6 @@ async function xp(message) {
       level: 0,
     });
     await newExp.save();
-
-    const newLevelData = await expModel.findOne({ memberID: message.author.id });
-
-    // Send their card (no background)
-    card(newLevelData, message.author, expModel, message);
   }
 }
 
