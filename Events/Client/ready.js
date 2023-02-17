@@ -73,15 +73,24 @@ module.exports = {
       breakModel.find({}).exec((err, res) => {
         i = 1;
         res.forEach(async (breakData) => {
-          const parsedDuration = ms(breakData.duration);
+          const givenDate = new Date(breakData.startedAt);
           const timeNow = new Date();
-          const timeSince = breakData.startedAt - timeNow;
-          console.log(timeSince);
-          if (timeSince > parsedDuration) {
-            const staffGuild = await client.guilds.fetch(constantsFile.staffServerID);
-            const breakRole = await staffGuild.roles.fetch("889258906797371402");
-            const member = await staffGuild.members.fetch(breakData.memberID);
-            await member.roles.remove(breakRole);
+
+          const timeSince = timeNow - givenDate;
+
+          if (breakData.startedAt < timeNow) {
+            console.log(`Member ID: ${breakData.memberID}`);
+            console.log(`Time since: ${timeSince}`);
+            console.log("---------------\n\n");
+
+            const parsedDuration = ms(breakData.duration);
+
+            if (timeSince > parsedDuration) {
+              const staffGuild = await client.guilds.fetch(constantsFile.staffServerID);
+              const breakRole = await staffGuild.roles.fetch("889258906797371402");
+              const member = await staffGuild.members.fetch(breakData.memberID);
+              await member.roles.remove(breakRole);
+            }
           }
         });
       });
