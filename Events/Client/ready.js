@@ -79,10 +79,6 @@ module.exports = {
           const timeSince = timeNow - givenDate;
 
           if (breakData.startedAt < timeNow) {
-            console.log(`Member ID: ${breakData.memberID}`);
-            console.log(`Time since: ${timeSince}`);
-            console.log("---------------\n\n");
-
             const parsedDuration = ms(breakData.duration);
 
             if (timeSince > parsedDuration) {
