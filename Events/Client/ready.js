@@ -90,6 +90,7 @@ module.exports = {
               const breakRole = await staffGuild.roles.fetch("889258906797371402");
               const member = await staffGuild.members.fetch(breakData.memberID);
               await member.roles.remove(breakRole);
+              await breakModel.findOneAndDelete({ memberID: breakData.memberID });
             }
           }
         });
