@@ -16,7 +16,7 @@ module.exports = {
     while (i < members.length) {
       try {
         const fetchedUser = await guild.members.fetch(members[i].memberID);
-        if (fetchedUser.roles.cache.has(constantsFile.retiredStaffRole) == false && fetchedUser.roles.cache.has("889258906797371402")) {
+        if (fetchedUser.roles.cache.has(constantsFile.retiredStaffRole) == false && fetchedUser.roles.cache.has("889258906797371402") == false) {
           await embed.addFields({ name: fetchedUser.user.username, value: `${members[i].messages}` });
         }
       } catch {}
