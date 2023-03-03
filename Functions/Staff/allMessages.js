@@ -1,6 +1,7 @@
 const messageModel = require("../../Model/messages.js");
 const { EmbedBuilder } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
+const averagesModel = require("../../Model/Staff/averages.js");
 
 async function allMessages(client) {
   const members = await messageModel.find();
@@ -17,6 +18,16 @@ async function allMessages(client) {
       const fetchedUser = await guild.members.fetch(members[i].memberID);
       if (fetchedUser.roles.cache.has(constantsFile.retiredStaffRole) == false) {
         description = description + fetchedUser.user.username + ": " + `${members[i].messages} \n\n`;
+
+        const data = await averagesModel.findOne({ memberID: fetchedUser.id });
+        if (data) {
+          data.averages.push(members[i].messages);
+        } else {
+          const newData = new averagesModel({
+            weeklyMessages: [members[i].messages],
+            memberID: fetchedUser.id,
+          });
+        }
       }
     } catch {}
     i++;
