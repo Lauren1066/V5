@@ -5,6 +5,7 @@ const { messageLB } = require("../../Functions/Messages/messageLB.js");
 const { check } = require("../../Functions/Staff/check.js");
 const { setstaffzero } = require("../../Functions/Staff/setStaffZero.js");
 const { staffCheck } = require("../../Functions/Staff/staffCheck.js");
+const { allMessages } = require("../../Functions/Staff/allMessages.js");
 const CronJob = require("cron").CronJob;
 const breakModel = require("../../Model/Staff/breaks.js");
 const ms = require("ms");
@@ -43,6 +44,8 @@ module.exports = {
     var job = new CronJob(
       "0 0 17 * * 5",
       async function () {
+        // Send a list of all messages
+        await allMessages(client);
         // Send a list of users who have less than 25 messages to the high staff channel
         await staffCheck(client);
         // Send the top messenger in main server, then clear messages
