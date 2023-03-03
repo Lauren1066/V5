@@ -22,11 +22,13 @@ async function allMessages(client) {
         const data = await averagesModel.findOne({ memberID: fetchedUser.id });
         if (data) {
           data.averages.push(members[i].messages);
+          data.save();
         } else {
           const newData = new averagesModel({
             weeklyMessages: [members[i].messages],
             memberID: fetchedUser.id,
           });
+          newData.save();
         }
       }
     } catch {}
