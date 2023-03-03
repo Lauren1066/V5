@@ -16,7 +16,7 @@ async function allMessages(client) {
     try {
       const fetchedUser = await guild.members.fetch(members[i].memberID);
       if (fetchedUser.roles.cache.has(constantsFile.retiredStaffRole) == false) {
-        description = description + fetchedUser.user.username + ": " + `${members[i].messages} \n`;
+        description = description + fetchedUser.user.username + ": " + `${members[i].messages} \n\n`;
       }
     } catch {}
     i++;
