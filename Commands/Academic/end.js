@@ -33,5 +33,22 @@ module.exports = {
       content: "``` ```",
       embeds: [embed],
     });
+
+    const helpChannel = await interaction.client.channels.fetch("1040792832832716800");
+    const openMessageID = "1081296676666486824";
+    const closedMessageID = "1081296678243536956";
+    const channelMention = `<#${interaction.channel.id}>`;
+    const openMessage = await helpChannel.messages.fetch(openMessageID);
+    const closedMessage = await helpChannel.messages.fetch(closedMessageID);
+
+    if (!openMessage.content.includes(channelMention)) {
+      const updatedOpenMessage = openMessage.content + `\n${channelMention}`;
+      openMessage.edit(updatedOpenMessage);
+    }
+
+    if (closedMessage.content.includes(channelMention)) {
+      const updatedClosedMessage = closedMessage.content.replace(`\n${channelMention}`, "");
+      closedMessage.edit(updatedClosedMessage);
+    }
   },
 };
