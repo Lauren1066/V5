@@ -11,7 +11,7 @@ module.exports = {
     const srAdminRole = await guild.roles.fetch("1050264785171791913");
 
     const roles = [jrModRole, modRole, srModRole, adminRole, srAdminRole];
-    const max = ["4", "3", "1", "5", "1"];
+    const max = ["4", "3", "1", "4", "1"];
 
     const embed = new EmbedBuilder().setTitle("Moderation Team");
 

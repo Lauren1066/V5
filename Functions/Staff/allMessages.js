@@ -3,7 +3,6 @@ const { EmbedBuilder } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
 
 async function allMessages(client) {
-  const client = interaction.client;
   const members = await messageModel.find();
   const guild = await client.guilds.fetch(constantsFile.staffServerID);
   const highStaffChannel = guild.channels.cache.get(constantsFile.highStaffChannel);
