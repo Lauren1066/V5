@@ -1,9 +1,12 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const pingCooldown = require("../../Model/Cooldowns/qotd.js");
 const constantsFile = require("../../Storage/constants.js");
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("qotd").setDescription("Pings the qotd ping role."),
+  data: new SlashCommandBuilder()
+    .setName("qotd")
+    .setDescription("Pings the qotd ping role.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageEvents),
   async execute(interaction) {
     let usedData = await pingCooldown.findOne({
       guildID: interaction.guild.id,

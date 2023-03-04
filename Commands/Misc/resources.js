@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const constants = require("../../Storage/constants.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("resources")
