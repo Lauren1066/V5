@@ -1,6 +1,7 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 const rep = require("../../Model/repBalance.js");
 const repCooldown = require("../../Model/Cooldowns/repCooldown");
+const { sendRepEmbed } = require("./Functions/sendRepEmbed.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,6 +10,8 @@ module.exports = {
     .addUserOption((option) => option.setName("target").setDescription("The user to rep").setRequired(true)),
   async execute(interaction) {
     const member = interaction.options.getUser("target");
+    const isModerator = interaction.member.roles.cache.has("1040834838690795560");
+
     let data = await rep.findOne({
       memberID: member.id,
     });
@@ -17,43 +20,26 @@ module.exports = {
       memberID: interaction.user.id,
     });
 
-    if (interaction.member.roles.cache.has("1040834838690795560")) {
+    if (isModerator) {
       if (data) {
         // Update data
         data.repAmount++;
         data.save();
 
         // Send embed
-        const embed = new EmbedBuilder()
-          .setTitle(`${member.tag} has gained 1 rep point!`)
-          .setColor("#8ef1ec")
-          .addFields({ name: "Current Rep Amount:", value: `${data.repAmount}` }, { name: "Rep Added By:", value: interaction.user.username });
-        interaction.reply({
-          embeds: [embed],
-        });
+        sendRepEmbed(interaction, member, data.repAmount);
       } else if (!data) {
         // New Data
-        let newData = new rep({
-          memberID: member.id,
-          repAmount: 1,
-        });
-        newData.save();
+        rep.create({ memberID: member.id, repAmount: 1 });
 
         // Send Embed
-        const embed = new EmbedBuilder()
-          .setTitle(`${member.tag} has gained 1 rep point!`)
-          .setColor("#8ef1ec")
-          .addFields({ name: "Current Rep Amount:", value: `1` }, { name: "Rep Added By:", value: interaction.user.username });
-        interaction.reply({
-          embeds: [embed],
-        });
+        sendRepEmbed(interaction, member, 1);
       }
     } else if (member.id != interaction.user.id) {
       if (data && usedData) {
         const canWork = usedData.lastUsed;
-        let x = Date.now();
 
-        const result = x - canWork;
+        const result = Date.now() - canWork;
         if (result >= 2700000) {
           // Update Data
           data.repAmount++;
@@ -64,41 +50,24 @@ module.exports = {
           usedData.save();
 
           // Send Embed
-          const embed = new EmbedBuilder()
-            .setTitle(`${member.tag} has gained 1 rep point!`)
-            .setColor("#8ef1ec")
-            .addFields({ name: "Current Rep Amount:", value: `${data.repAmount}` }, { name: "Rep Added By:", value: interaction.user.username });
-          interaction.reply({
-            embeds: [embed],
-          });
+          sendRepEmbed(interaction, member, data.repAmount);
         } else {
           interaction.reply("The cooldown for this command is not up yet");
         }
       } else if (!data && usedData) {
         const canWork = usedData.lastUsed;
-        let x = Date.now();
 
-        const result = x - canWork;
+        const result = Date.now() - canWork;
         if (result >= 2700000) {
           // New Rep
-          let newData = new rep({
-            memberID: member.id,
-            repAmount: 1,
-          });
-          newData.save();
+          rep.create({ memberID: member.id, repAmount: 1 });
 
           // Update Cooldown
           usedData.lastUsed = new Date();
           usedData.save();
 
           // Send Embed
-          const embed = new EmbedBuilder()
-            .setTitle(`${member.tag} has gained 1 rep point!`)
-            .setColor("#8ef1ec")
-            .addFields({ name: "Current Rep Amount:", value: `1` }, { name: "Rep Added By:", value: interaction.user.username });
-          interaction.reply({
-            embeds: [embed],
-          });
+          sendRepEmbed(interaction, member, 1);
         } else {
           interaction.reply("The cooldown for this command is not up yet");
         }
@@ -108,45 +77,22 @@ module.exports = {
         data.save();
 
         // Make new cooldown
-        let newCooldown = new repCooldown({
-          guildID: interaction.guild.id,
-          memberID: interaction.user.id,
-          lastUsed: Date.now(),
-        });
-        newCooldown.save();
+        repCooldown.create({ guildID: interaction.guild.id, memberID: interaction.user.id, lastUsed: Date.now() });
 
         // Send Embed
-        const embed = new EmbedBuilder()
-          .setTitle(`${member.tag} has gained 1 rep point!`)
-          .setColor("#8ef1ec")
-          .addFields({ name: "Current Rep Amount:", value: `${data.repAmount}` }, { name: "Rep Added By:", value: interaction.user.username });
+        sendRepEmbed(interaction, member, data.repAmount);
         interaction.reply({
           embeds: [embed],
         });
       } else if (!data && !usedData) {
         // New Rep
-        let newData = new rep({
-          memberID: member.id,
-          repAmount: 1,
-        });
-        newData.save();
+        rep.create({ memberID: member.id, repAmount: 1 });
 
         // New cooldown
-        let newCooldown = new repCooldown({
-          guildID: interaction.guild.id,
-          memberID: interaction.user.id,
-          lastUsed: Date.now(),
-        });
-        newCooldown.save();
+        repCooldown.create({ guildID: interaction.guild.id, memberID: interaction.user.id, lastUsed: Date.now() });
 
         // Send Embed
-        const embed = new EmbedBuilder()
-          .setTitle(`${member.tag} has gained 1 rep point!`)
-          .setColor("#8ef1ec")
-          .addFields({ name: "Current Rep Amount:", value: `1` }, { name: "Rep Added By:", value: interaction.user.username });
-        interaction.reply({
-          embeds: [embed],
-        });
+        sendRepEmbed(interaction, member, 1);
       }
     } else {
       interaction.reply("You can't rep yourself");
