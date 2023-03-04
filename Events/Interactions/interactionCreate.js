@@ -14,11 +14,7 @@ module.exports = {
           data.messages++;
           data.save();
         } else if (!data) {
-          let newData = new messageModel({
-            memberID: interaction.user.id,
-            messages: 1,
-          });
-          newData.save();
+          messageModel.create({ memberID: interaction.user.id, messages: 1 });
         }
       }
 

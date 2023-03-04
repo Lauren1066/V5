@@ -54,11 +54,7 @@ module.exports = {
           data.messages++;
           data.save();
         } else if (!data) {
-          let newData = new messageModel({
-            memberID: message.author.id,
-            messages: 1,
-          });
-          newData.save();
+          messageModel.create({ memberID: message.author.id, messages: 1 });
         }
       }
     }

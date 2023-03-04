@@ -47,25 +47,22 @@ module.exports = {
       } else {
         if (backgroundURL && textColor && regex.test(textColor) == true) {
           if (backgroundURL.includes(".png") || backgroundURL.includes(".jpg") || backgroundURL.includes(".jpeg")) {
-            const newData = new backgroundModel({ memberID: interaction.user.id, background: backgroundURL, color: textColor });
-            newData.save();
+            backgroundModel.create({ memberID: interaction.user.id, background: backgroundURL, color: textColor });
           } else {
             interaction.reply("Make sure your link ends in .png .jpg or .jpeg");
           }
         } else if (backgroundURL) {
           if (backgroundURL.includes(".png") || backgroundURL.includes(".jpg") || backgroundURL.includes(".jpeg")) {
-            const newData = new backgroundModel({ memberID: interaction.user.id, background: backgroundURL, color: "#FFF" });
-            newData.save();
+            backgroundModel.create({ memberID: interaction.user.id, background: backgroundURL, color: "#FFF" });
           } else {
             interaction.reply("Make sure your link ends in .png .jpg or .jpeg");
           }
         } else if (textColor && regex.test(textColor) == true) {
-          const newData = new backgroundModel({
+          backgroundModel.create({
             memberID: interaction.user.id,
             background: "https://t4.ftcdn.net/jpg/04/92/22/93/360_F_492229389_5ve1bCKgYrLRHpCj3o4FAzz60efaZgG0.jpg",
             color: textColor,
           });
-          newData.save();
         } else if (textColor && regex.test(textColor) == false) {
           interaction.reply("Invalid hex color! Please use https://htmlcolorcodes.com/color-picker/ and use the one with the # beside it!");
         } else {

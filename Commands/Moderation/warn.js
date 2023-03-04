@@ -25,11 +25,7 @@ module.exports = {
       data.save();
       var warnAmount = data.reasons.length;
     } else if (!data && member.roles.cache.has(constantsFile.mainStaffrole) == false) {
-      const newData = new warnModel({
-        memberID: user.id,
-        reasons: [warnReason],
-      });
-      newData.save();
+      warnModel.create({ memberID: user.id, reasons: [warnReason] });
       var warnAmount = 1;
     } else if (member.roles.cache.has(constantsFile.mainStaffrole) == true) {
       interaction.reply("You can't warn a staff member!");

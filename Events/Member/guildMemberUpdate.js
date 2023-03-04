@@ -13,11 +13,7 @@ module.exports = {
         await jrModModel.deleteMany({ memberID: newMember.id });
       }
       const date = new Date();
-      const newData = new jrModModel({
-        memberID: newMember.id,
-        dateAdded: date,
-      });
-      newData.save();
+      jrModModel.create({ memberID: newMember.id, dateAdded: date });
     } else if (hasRole == false && hadRole == true && oldMember.id == newMember.id) {
       await jrModModel.deleteMany({ memberID: newMember.id });
     }

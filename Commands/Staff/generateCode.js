@@ -15,11 +15,7 @@ module.exports = {
     });
     if (interaction.guild.id == constantsFile.staffServerID && data === null) {
       try {
-        const newData = await new codeModel({
-          memberID: interaction.user.id,
-          code: userCode,
-        });
-        newData.save();
+        codeModel.create({ memberID: interaction.user.id, code: userCode });
         await interaction.user.send(`Your code is ${userCode}. Please write this down somewhere secure and do not share it with anyone!`);
         await interaction.reply("Check your DMs!");
       } catch {

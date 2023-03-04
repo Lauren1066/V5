@@ -24,11 +24,7 @@ async function allMessages(client) {
           data.averages.push(members[i].messages);
           data.save();
         } else {
-          const newData = new averagesModel({
-            weeklyMessages: [members[i].messages],
-            memberID: fetchedUser.id,
-          });
-          newData.save();
+          averagesModel.create({ weeklyMessages: [members[i].messages], memberID: fetchedUser.id });
         }
       }
     } catch {}

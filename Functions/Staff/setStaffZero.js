@@ -6,11 +6,7 @@ async function setstaffzero(client) {
   guild.members.cache.forEach(async (member) => {
     let data = await messageModel.findOne({ memberID: member.id });
     if (!data && member.user.bot == false) {
-      let newData = new messageModel({
-        memberID: member.id,
-        messages: 0,
-      });
-      newData.save();
+      messageModel.create({ memberID: member.id, messages: 0 });
     }
   });
 }

@@ -25,8 +25,7 @@ module.exports = {
         const breakMember = await guild.members.fetch(id);
         if (breakMember) {
           breakMember.roles.add("889258906797371402");
-          const newData = new breakModel({ memberID: id, duration: duration, startedAt: new Date() });
-          newData.save();
+          breakModel.create({ memberID: id, duration: duration, startedAt: new Date() });
         } else {
           interaction.reply("I can't seem to find that user!");
           return;
