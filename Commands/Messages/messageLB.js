@@ -41,10 +41,10 @@ module.exports = {
               console.log(err);
             });
             if (name == "User left") {
-              embed.addFields({ name: `${i + 1}. ${name}`, value: `**Messages:** ${res[i].messages}` });
+              embed.addFields({ name: `${ordinal(i + 1)}. ${name}`, value: `**Messages:** ${res[i].messages}` });
             } else {
               embed.addFields({
-                name: `${i + 1}. ${name.username}`,
+                name: `${ordinal(i + 1)}. ${name.username}`,
                 value: `**Messages:** ${res[i].messages}`,
               });
             }

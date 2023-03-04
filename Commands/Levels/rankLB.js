@@ -42,10 +42,10 @@ module.exports = {
               console.log(err);
             });
             if (name == "User left") {
-              embed.addFields({ name: `${i + 1}. ${name}`, value: `**Level:** ${res[i].level}` });
+              embed.addFields({ name: `${ordinal(i + 1)}. ${name}`, value: `**Level:** ${res[i].level}` });
             } else {
               embed.addFields({
-                name: `${i + 1}. ${name.username}`,
+                name: `${ordinal(i + 1)}. ${name.username}`,
                 value: `**Level:** ${res[i].level}`,
               });
             }

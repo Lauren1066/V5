@@ -16,7 +16,7 @@ module.exports = {
             name: "After Hours Reputation Leaderboard",
             iconURL: guild.iconURL({ extension: "png" }),
           })
-          .setColor("#ee8a51");
+          .setColor("#8ef1ec");
         if (res.length === 0) {
           embed.setColor("#8ef1ec");
           embed.addFields({ value: "No results found!" });
@@ -43,10 +43,10 @@ module.exports = {
               console.log(err);
             });
             if (name == "User left") {
-              embed.addFields({ name: `${i + 1}. ${name}`, value: `**Rep:** ${res[i].repAmount}` });
+              embed.addFields({ name: `${ordinal(i + 1)}}. ${name}`, value: `**Rep:** ${res[i].repAmount}` });
             } else {
               embed.addFields({
-                name: `${i + 1}. ${name.username}`,
+                name: `${ordinal(i + 1)}. ${name.username}`,
                 value: `**Rep:** ${res[i].repAmount}`,
               });
             }
