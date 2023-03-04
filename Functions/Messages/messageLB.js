@@ -15,7 +15,7 @@ async function messageLB(job, client) {
     .find({})
     .sort([["messages", "descending"]])
     .limit(2)
-    .exec(async (err, res) => {
+    .then(async (res) => {
       if (err) console.log(err);
       if (res[0].memberID != constantsFile.ownerID) {
         const eventChannel = mainGuild.channels.cache.get(constantsFile.mainLBChannel);

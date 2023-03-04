@@ -9,7 +9,7 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     var deletedData = 0;
-    expModel.find({}).exec(async (err, res) => {
+    expModel.find({}).then(async (res) => {
       for (let i = 0; i < res.length; i++) {
         const guild = interaction.client.guilds.cache.get(constantsFile.mainServerID);
         try {

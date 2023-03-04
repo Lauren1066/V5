@@ -10,7 +10,7 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     var deletedData = 0;
-    repCooldown.find({}).exec(async (err, res) => {
+    repCooldown.find({}).then(async (res) => {
       for (let i = 0; i < res.length; i++) {
         const guild = interaction.client.guilds.cache.get(constantsFile.mainServerID);
         try {
@@ -22,7 +22,7 @@ module.exports = {
       }
     });
 
-    helperCooldown.find({}).exec(async (err, res) => {
+    helperCooldown.find({}).then(async (res) => {
       for (let i = 0; i < res.length; i++) {
         const guild = interaction.client.guilds.cache.get(constantsFile.mainServerID);
         try {

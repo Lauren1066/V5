@@ -10,8 +10,7 @@ module.exports = {
     rep
       .find({})
       .sort([["repAmount", "descending"]])
-      .exec(async (err, res) => {
-        if (err) console.log(err);
+      .then(async (res) => {
         const embed = new EmbedBuilder()
           .setAuthor({
             name: "After Hours Reputation Leaderboard",

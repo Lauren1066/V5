@@ -26,7 +26,7 @@ module.exports = {
             guildID: constantsFile.mainServerID,
           })
           .sort({ level: -1, xp: -1 })
-          .exec(async (err, res) => {
+          .then(async (res) => {
             i = 1;
             await res.forEach((member) => {
               if (member.memberID == data.memberID) {
@@ -62,7 +62,7 @@ module.exports = {
             guildID: constantsFile.mainServerID,
           })
           .sort({ level: -1, xp: -1 })
-          .exec((err, res) => {
+          .then(async (res) => {
             i = 1;
             res.forEach((member) => {
               if (member.memberID == data.memberID) {
@@ -100,7 +100,7 @@ module.exports = {
           guildID: constantsFile.mainServerID,
         })
         .sort({ level: -1, xp: -1 })
-        .exec((err, res) => {
+        .then(async (res) => {
           i = 1;
           res.forEach((member) => {
             if (member.memberID == data.memberID) {

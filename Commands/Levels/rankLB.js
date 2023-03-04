@@ -8,8 +8,7 @@ module.exports = {
     rep
       .find({})
       .sort({ level: -1, xp: -1 })
-      .exec(async (err, res) => {
-        if (err) console.log(err);
+      .then(async (res) => {
         const embed = new EmbedBuilder()
           .setAuthor({
             name: "After Hours XP Leaderboard",

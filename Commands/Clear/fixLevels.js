@@ -2,16 +2,20 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const expModel = require("../../Model/Levels/exp.js");
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("update").setDescription("Fix the levels.").setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+  data: new SlashCommandBuilder()
+    .setName("fixlevels")
+    .setDescription("Fix the levels.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
-    await expModel.find({}).exec(async (err, res) => {
+    await expModel.find({}).then(async (res) => {
+      await interaction.deferReply();
       for (let i = 0; i < res.length; i++) {
-        res.level = new Number(res.level);
-        res.xp = new Number(res.xp);
+        res[i].level = new Number(res[i].level);
+        res[i].xp = new Number(res[i].xp);
 
-        expModel.save();
+        await res[i].save();
       }
     });
-    interaction.reply(`Updated!`);
+    interaction.editReply(`Updated!`);
   },
 };
