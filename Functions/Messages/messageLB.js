@@ -24,7 +24,7 @@ async function messageLB(job, client) {
         const embed = new EmbedBuilder()
           .setTitle("Weekly Top Messenger!")
           .setColor("#8ef1ec")
-          .setAuthor({ name: "After Hours", iconURL: client.user.displayAvatarURL() })
+          .setAuthor({ name: "After Hours", iconURL: mainGuild.iconURL({ extension: "png" }) })
           .addFields(
             {
               name: "User:",
@@ -42,7 +42,7 @@ async function messageLB(job, client) {
         const embed = new EmbedBuilder()
           .setTitle("Weekly Top Messenger!")
           .setColor("#8ef1ec")
-          .setAuthor({ name: "After Hours", iconURL: client.user.displayAvatarURL() })
+          .setAuthor({ name: "After Hours", iconURL: mainGuild.iconURL({ extension: "png" }) })
           .addFields(
             {
               name: "User:",

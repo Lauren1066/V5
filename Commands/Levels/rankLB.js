@@ -4,7 +4,7 @@ const ordinal = (num) => `${num.toLocaleString("en-US")}${[, "st", "nd", "rd"][(
 
 module.exports = {
   data: new SlashCommandBuilder().setName("ranklb").setDescription("Check the xp leaderboard."),
-  async execute(interaction, client) {
+  async execute(interaction) {
     rep
       .find({})
       .sort({ level: -1, xp: -1 })
@@ -12,7 +12,7 @@ module.exports = {
         const embed = new EmbedBuilder()
           .setAuthor({
             name: "After Hours XP Leaderboard",
-            iconURL: client.user.displayAvatarURL(),
+            iconURL: guild.iconURL({ extension: "png" }),
           })
           .setColor("#8ef1ec");
         if (res.length === 0) {
