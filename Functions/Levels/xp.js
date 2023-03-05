@@ -23,7 +23,7 @@ async function xp(message) {
   const randomNumber = rn(options);
 
   if (levelData) {
-    const { level, xp } = levelData;
+    let { level, xp } = levelData;
     const xpNeeded = 5 * Math.pow(level, 2) + 60 * level + 100;
     xp += randomNumber;
 
