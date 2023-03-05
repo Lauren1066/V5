@@ -9,96 +9,42 @@ const { backgroundCard } = require("./RankCards/backgroundCard.js");
 
 // Start the function
 async function xp(message) {
-  // Find the data
-  let levelData = await expModel.findOne({
-    guildID: constantsFile.mainServerID,
-    memberID: message.author.id,
-  });
-
-  let backgroundData = await backgroundModel.findOne({ memberID: message.author.id });
+  // Find the data and get main server
+  const guild = await message.client.guilds.fetch(constantsFile.mainServerID);
+  const levelData = await expModel.findOne({ guildID: constantsFile.mainServerID, memberID: message.author.id });
+  const backgroundData = await backgroundModel.findOne({ memberID: message.author.id });
 
   // Get the random XP amount
-  var options = {
+  const options = {
     min: constantsFile.minXP,
     max: constantsFile.maxXp,
     integer: true,
   };
   const randomNumber = rn(options);
 
-  // Get the main server
-  const guild = await message.client.guilds.fetch(constantsFile.mainServerID);
+  if (levelData) {
+    const { level, xp } = levelData;
+    const xpNeeded = 5 * Math.pow(level, 2) + 60 * level + 100;
+    xp += randomNumber;
 
-  if (levelData && backgroundData) {
-    // Add to their xp and set it equal to their xp
-    x = levelData.xp + randomNumber;
-    levelData.xp = x;
+    if (xpNeeded <= xp) {
+      level++;
+      xp -= xpNeeded;
 
-    // Get their info
-    var level = levelData.level;
-    var xp = levelData.xp;
-    var xpNeeded = 5 * Math.pow(levelData.level, 2) + 60 * levelData.level + 100;
-
-    // If they're gonna level up
-    if (xpNeeded < xp) {
-      // They level up
-      z = level + 1;
-      levelData.level = z;
-
-      // Find new xp value
-      y = levelData.xp - xpNeeded;
-      levelData.xp = y;
-
-      // Try to use their background
       try {
         backgroundCard(levelData, backgroundData, message.author, expModel, message);
-        // If it doesn't work
       } catch (error) {
         console.log(error);
         card(levelData, message.author, expModel, message);
         message.channel.send("Your custom card does not seem to be working!");
       }
-      // See if they need roles added
-      checkLevel(z, guild, message.member);
+
+      checkLevel(level, guild, message.member);
     }
-    // Save the updated data
+
     levelData.save();
-  } else if (levelData && !backgroundData) {
-    // Add to their xp and set it equal to their xp
-    x = levelData.xp + randomNumber;
-    levelData.xp = x;
-
-    // Get their info
-    var level = levelData.level;
-    var xp = levelData.xp;
-    var xpNeeded = 5 * Math.pow(levelData.level, 2) + 60 * levelData.level + 100;
-
-    // If they're gonna level up
-    if (xpNeeded < xp) {
-      // They level up
-      z = level + 1;
-      levelData.level = z;
-
-      // Find new xp value
-      y = levelData.xp - xpNeeded;
-      levelData.xp = y;
-
-      // Send their card (no background)
-      card(levelData, message.author, expModel, message);
-
-      // See if they need roles added
-      checkLevel(z, guild, message.member);
-    }
-    // Save all updated data
-    levelData.save();
-  } else if (!levelData) {
-    // Add them to  the database and save
-    let newExp = new expModel({
-      guildID: constantsFile.mainServerID,
-      xp: randomNumber,
-      memberID: message.author.id,
-      level: 0,
-    });
-    await newExp.save();
+  } else {
+    expModel.create({ guildID: constantsFile.mainServerID, xp: randomNumber, memberID: message.author.id, level: 0 });
   }
 }
 
