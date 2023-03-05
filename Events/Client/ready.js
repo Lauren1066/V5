@@ -1,15 +1,17 @@
 const { ActivityType } = require("discord.js");
-const constantsFile = require("../../Storage/constants.js");
 const mongoose = require("mongoose");
+const CronJob = require("cron").CronJob;
+const ms = require("ms");
+
+const config = require("../../Storage/config.json");
+const constantsFile = require("../../Storage/constants.js");
+const breakModel = require("../../Model/Staff/breaks.js");
+
 const { messageLB } = require("../../Functions/Messages/messageLB.js");
 const { check } = require("../../Functions/Staff/check.js");
 const { setstaffzero } = require("../../Functions/Staff/setStaffZero.js");
 const { staffCheck } = require("../../Functions/Staff/staffCheck.js");
 const { allMessages } = require("../../Functions/Staff/allMessages.js");
-const CronJob = require("cron").CronJob;
-const breakModel = require("../../Model/Staff/breaks.js");
-const ms = require("ms");
-const config = require("../../Storage/config.json");
 
 module.exports = {
   name: "ready",
@@ -41,17 +43,10 @@ module.exports = {
     });
 
     // Friday at 5 (Clear Day)
-    var job = new CronJob(
+    const fridayJob = new CronJob(
       "0 0 17 * * 5",
       async function () {
-        // Send a list of all messages
-        await allMessages(client);
-        // Send a list of users who have less than 25 messages to the high staff channel
-        await staffCheck(client);
-        // Send the top messenger in main server, then clear messages
-        await messageLB(job, client);
-        // Set all staff members to 0 messages (so they will show up when doing /forcestaffcheck)
-        await setstaffzero(client);
+        await Promise.all([allMessages(client), staffCheck(client), messageLB(fridayJob, client), setstaffzero(client)]);
       },
       null,
       true,
@@ -59,46 +54,36 @@ module.exports = {
     );
 
     // Sunday at midnight
-    var staffCheckJob = new CronJob(
+    const staffCheckJob = new CronJob(
       "0 0 0 * * 1",
       async function () {
-        // Send a list of users who have less than 25 messages to the high staff channel
-        await staffCheck(client);
-        // Same thing but in announcements channel
-        check(staffCheckJob, client);
+        await Promise.all([staffCheck(client), check(staffCheckJob, client)]);
       },
       null,
       true,
       "America/New_York"
     );
 
-    const checkBreaks = async function CheckBreaks() {
-      breakModel
-        .find({})
-        .then((res) => {
-          i = 1;
-          res.forEach(async (breakData) => {
-            const givenDate = new Date(breakData.startedAt);
-            const timeNow = new Date();
+    const checkBreaks = async function () {
+      try {
+        const breakDatas = await breakModel.find({});
+        const staffGuild = await client.guilds.fetch(constantsFile.staffServerID);
+        const breakRole = await staffGuild.roles.fetch("889258906797371402");
 
-            const timeSince = timeNow - givenDate;
+        for (const breakData of breakDatas) {
+          const givenDate = new Date(breakData.startedAt);
+          const timeNow = new Date();
+          const timeSince = timeNow - givenDate;
 
-            if (breakData.startedAt < timeNow) {
-              const parsedDuration = ms(breakData.duration);
-
-              if (timeSince > parsedDuration) {
-                const staffGuild = await client.guilds.fetch(constantsFile.staffServerID);
-                const breakRole = await staffGuild.roles.fetch("889258906797371402");
-                const member = await staffGuild.members.fetch(breakData.memberID);
-                await member.roles.remove(breakRole);
-                await breakModel.findOneAndDelete({ memberID: breakData.memberID });
-              }
-            }
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+          if (breakData.startedAt < timeNow && timeSince > ms(breakData.duration)) {
+            const member = await staffGuild.members.fetch(breakData.memberID);
+            await member.roles.remove(breakRole);
+            await breakModel.findOneAndDelete({ memberID: breakData.memberID });
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     setInterval(checkBreaks, 60000);
