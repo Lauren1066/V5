@@ -66,7 +66,7 @@ module.exports = {
 
     // Every day
     const eventReminderJob = new CronJob(
-      "0 40 12 * * */1",
+      "0 0 12 * * */1",
       async function () {
         const eventsChannel = await client.channels.fetch("1082174310627680287");
         eventsChannel.send("<@&889258566115033138> do your events!");
