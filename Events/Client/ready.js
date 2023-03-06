@@ -64,6 +64,18 @@ module.exports = {
       "America/New_York"
     );
 
+    // Every day
+    const eventReminderJob = new CronJob(
+      "0 40 12 * * */1",
+      async function () {
+        const eventsChannel = await client.channels.fetch("1082174310627680287");
+        eventsChannel.send("<@&889258566115033138> do your events!");
+      },
+      null,
+      true,
+      "America/New_York"
+    );
+
     const checkBreaks = async function () {
       try {
         const breakDatas = await breakModel.find({});
