@@ -99,5 +99,39 @@ module.exports = {
     };
 
     setInterval(checkBreaks, 60000);
+    async function checkOfflineUsers() {
+      const guildId = "980559928911618090";
+      const offlineUserIds = ["1066546620184932383"];
+      const dmRecipientId = "693511698912641105";
+
+      try {
+        const guild = await client.guilds.fetch(guildId);
+        const newOfflineUsers = [];
+
+        for (const userId of offlineUserIds) {
+          try {
+            const member = await guild.members.fetch(userId);
+            console.log(member.presence.status);
+            if (member.presence.status === "offline") {
+              newOfflineUsers.push(member.user.username);
+
+              const recipient = await client.users.fetch(dmRecipientId);
+              await recipient.send(`User ${member.user.username} is now offline.`);
+            }
+          } catch (error) {
+            console.error(`Error fetching user ${userId}:`, error);
+          }
+        }
+
+        console.log("Offline users:", newOfflineUsers);
+        offlineUserIds.splice(0, offlineUserIds.length, ...newOfflineUsers.map((user) => user.id));
+      } catch (error) {
+        console.error(`Error fetching guild ${guildId} or its members:`, error);
+      }
+
+      setTimeout(checkOfflineUsers, 60000);
+    }
+
+    checkOfflineUsers();
   },
 };
