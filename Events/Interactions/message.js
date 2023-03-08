@@ -34,6 +34,8 @@ module.exports = {
       } else {
         return;
       }
+    } else if (!member.roles.cache.has(constantsFile.levelfiverole)) {
+      message.reply("You must be level 5 to apply!");
     }
 
     if (message.channel.type === 0) {
