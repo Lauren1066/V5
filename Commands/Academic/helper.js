@@ -57,6 +57,22 @@ module.exports = {
           usedData.save();
           await interaction.channel.send(`<@&${role.roleID}>`);
           await interaction.editReply(`<@${interaction.user.id}> needs help\nBe sure to send your question!`);
+          const helpChannel = await interaction.client.channels.fetch("1040792832832716800");
+          const openMessageID = "1081296676666486824";
+          const closedMessageID = "1081296678243536956";
+          const channelMention = `<#${interaction.channel.id}>`;
+          const openMessage = await helpChannel.messages.fetch(openMessageID);
+          const closedMessage = await helpChannel.messages.fetch(closedMessageID);
+
+          if (!closedMessage.content.includes(channelMention)) {
+            const updatedOpenMessage = `${closedMessage.content} \n${channelMention}`;
+            closedMessage.edit(updatedOpenMessage);
+          }
+
+          if (openMessage.content.includes(channelMention)) {
+            const updatedClosedMessage = openMessage.content.replace(`\n${channelMention}`, "");
+            openMessage.edit(updatedClosedMessage);
+          }
         }
       } else if (!usedData) {
         let newCooldown = new helperCooldown({
@@ -67,26 +83,25 @@ module.exports = {
         newCooldown.save();
         await interaction.channel.send(`<@&${role.roleID}>`);
         await interaction.editReply(`<@${interaction.user.id}> needs help\nBe sure to send your question!`);
+        const helpChannel = await interaction.client.channels.fetch("1040792832832716800");
+        const openMessageID = "1081296676666486824";
+        const closedMessageID = "1081296678243536956";
+        const channelMention = `<#${interaction.channel.id}>`;
+        const openMessage = await helpChannel.messages.fetch(openMessageID);
+        const closedMessage = await helpChannel.messages.fetch(closedMessageID);
+
+        if (!closedMessage.content.includes(channelMention)) {
+          const updatedOpenMessage = `${closedMessage.content} \n${channelMention}`;
+          closedMessage.edit(updatedOpenMessage);
+        }
+
+        if (openMessage.content.includes(channelMention)) {
+          const updatedClosedMessage = openMessage.content.replace(`\n${channelMention}`, "");
+          openMessage.edit(updatedClosedMessage);
+        }
       }
     } else {
       interaction.editReply(`This must be used in an academic text channel! Be sure to read <#${constantsFile.getHelpChannel}>`);
-    }
-
-    const helpChannel = await interaction.client.channels.fetch("1040792832832716800");
-    const openMessageID = "1081296676666486824";
-    const closedMessageID = "1081296678243536956";
-    const channelMention = `<#${interaction.channel.id}>`;
-    const openMessage = await helpChannel.messages.fetch(openMessageID);
-    const closedMessage = await helpChannel.messages.fetch(closedMessageID);
-
-    if (!closedMessage.content.includes(channelMention)) {
-      const updatedOpenMessage = `${closedMessage.content} \n${channelMention}`;
-      closedMessage.edit(updatedOpenMessage);
-    }
-
-    if (openMessage.content.includes(channelMention)) {
-      const updatedClosedMessage = openMessage.content.replace(`\n${channelMention}`, "");
-      openMessage.edit(updatedClosedMessage);
     }
   },
 };
