@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
+const reviewsModel = require("../../Model/reviews.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -31,10 +32,27 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle(`${user.username}'s review`)
-      .addFields({ name: "Stars", value: stars, inline: true }, { name: "Review", value: review, inline: true });
+      .addFields({ name: "Stars", value: `${stars}` }, { name: "Review", value: review }, { name: "Reviewed by", value: interaction.user.username })
+      .setColor("#4dccff");
 
-    await channel.send({ embeds: [embed] });
+    await channel.send({ content: `<@${user.id}>`, embeds: [embed] });
 
-    return interaction.reply({ content: "Review submitted!", ephemeral: true });
+    interaction.reply({ content: "Review submitted!", ephemeral: true });
+
+    const data = await reviewsModel.findOne({ memberID: interaction.user.id });
+    if (data) {
+      const newTotalStars = data.totalStars + stars;
+      const newTotalReviews = data.totalReviews + 1;
+
+      await reviewsModel.updateOne({ memberID: interaction.user.id }, { totalStars: newTotalStars, totalReviews: newTotalReviews });
+    } else {
+      const newReview = new reviewsModel({
+        memberID: interaction.user.id,
+        totalStars: stars,
+        totalReviews: 1,
+      });
+
+      await newReview.save();
+    }
   },
 };

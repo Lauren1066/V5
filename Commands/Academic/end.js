@@ -21,7 +21,7 @@ module.exports = {
       })
       .addFields(
         {
-          name: "If you felt your helper did a good job consider doing /rep <user>",
+          name: "If you felt your helper did a good job consider doing /rep <user> and leave a /review",
           value: "If you did not find your helper helpful we are very sorry to hear that! If you feel the need, let the owner know!",
         },
         {

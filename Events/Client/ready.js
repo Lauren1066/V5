@@ -111,7 +111,6 @@ module.exports = {
         for (const userId of offlineUserIds) {
           try {
             const member = await guild.members.fetch(userId);
-            console.log(member.presence.status);
             if (member.presence.status === "offline") {
               newOfflineUsers.push(member.user.username);
 
