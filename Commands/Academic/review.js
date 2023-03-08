@@ -29,11 +29,9 @@ module.exports = {
     const guild = await interaction.client.guilds.fetch(constantsFile.mainServerID);
     const channel = await guild.channels.fetch("1083143120226635826");
 
-    if (stars < 0 || stars > 5) {
-      return interaction.reply({ content: "Must be between 0-5 stars!", ephemeral: true });
-    }
-
-    const embed = new EmbedBuilder().setTitle(`${user.username}'s review`).addField("Stars", stars, true).addField("Review", review, true);
+    const embed = new EmbedBuilder()
+      .setTitle(`${user.username}'s review`)
+      .addFields({ name: "Stars", value: stars, inline: true }, { name: "Review", value: review, inline: true });
 
     await channel.send({ embeds: [embed] });
 
