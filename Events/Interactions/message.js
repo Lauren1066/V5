@@ -12,9 +12,11 @@ module.exports = {
   once: false,
   async execute(message) {
     if (message.author.bot) return;
+    const guild = await message.client.guilds.fetch(constantsFile.mainServerID);
+    const member = await guild.members.fetch(message.author.id);
 
     // DMs
-    if (message.channel.type === 1) {
+    if (message.channel.type === 1 && member.roles.cache.has(constantsFile.levelfiverole)) {
       const applicationData = await applicationModel.findOne({
         memberID: message.author.id,
       });
