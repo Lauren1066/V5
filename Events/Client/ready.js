@@ -123,7 +123,6 @@ module.exports = {
           }
         }
 
-        console.log("Offline users:", newOfflineUsers);
         offlineUserIds.splice(0, offlineUserIds.length, ...newOfflineUsers.map((user) => user.id));
       } catch (error) {
         console.error(`Error fetching guild ${guildId} or its members:`, error);
