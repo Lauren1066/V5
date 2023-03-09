@@ -5,6 +5,7 @@ const ordinal = (num) => `${num.toLocaleString("en-US")}${[, "st", "nd", "rd"][(
 module.exports = {
   data: new SlashCommandBuilder().setName("messagelb").setDescription("Check the message leaderboard."),
   async execute(interaction) {
+    const guild = interaction.guild;
     rep
       .find({})
       .sort([["messages", "descending"]])
