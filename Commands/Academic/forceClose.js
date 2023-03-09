@@ -10,8 +10,6 @@ module.exports = {
       interaction.channel.parentId == constantsFile.academicCategory &&
       interaction.member.roles.cache.has(constantsFile.mainStaffrole)
     ) {
-      await interaction.channel.send(`<@&${role.roleID}>`);
-      await interaction.editReply(`<@${interaction.user.id}> needs help\nBe sure to send your question!`);
       const helpChannel = await interaction.client.channels.fetch("1040792832832716800");
       const openMessageID = "1081296676666486824";
       const closedMessageID = "1081296678243536956";
