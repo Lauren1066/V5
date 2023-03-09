@@ -44,10 +44,10 @@ module.exports = {
       const newTotalStars = data.totalStars + stars;
       const newTotalReviews = data.totalReviews + 1;
 
-      await reviewsModel.updateOne({ memberID: interaction.user.id }, { totalStars: newTotalStars, totalReviews: newTotalReviews });
+      await reviewsModel.updateOne({ memberID: user.id }, { totalStars: newTotalStars, totalReviews: newTotalReviews });
     } else {
       const newReview = new reviewsModel({
-        memberID: interaction.user.id,
+        memberID: user.id,
         totalStars: stars,
         totalReviews: 1,
       });
