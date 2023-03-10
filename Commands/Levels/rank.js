@@ -30,6 +30,9 @@ module.exports = {
     const color = backgroundData ? backgroundData.color : "#ffffff";
     const background = backgroundData ? backgroundData.background : "#000001";
 
+    const leaderboard = await expModel.find({ guildID: constantsFile.mainServerID }).sort({ level: -1, xp: -1 });
+    const userRank = leaderboard.findIndex((element) => element.memberID === userID) + 1;
+
     const rank = new canvacord.Rank()
       .setAvatar(user.displayAvatarURL({ extension: "png" }))
       .setCurrentXP(data.xp, color)
@@ -38,6 +41,7 @@ module.exports = {
       .setProgressBar(color, "COLOR")
       .setUsername(user.username, color)
       .setLevel(data.level)
+      .setRank(userRank)
       .setLevelColor(color, color)
       .setRankColor(color, color)
       .setOverlay(color, 0, false)

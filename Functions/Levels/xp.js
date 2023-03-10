@@ -23,13 +23,12 @@ async function xp(message) {
   const randomNumber = rn(options);
 
   if (levelData) {
-    let { level, xp } = levelData;
-    const xpNeeded = 5 * Math.pow(level, 2) + 60 * level + 100;
-    xp += randomNumber;
+    const xpNeeded = 5 * Math.pow(levelData.level, 2) + 60 * levelData.level + 100;
+    levelData.xp += randomNumber;
 
-    if (xpNeeded <= xp) {
+    if (xpNeeded <= levelData.xp) {
       level++;
-      xp -= xpNeeded;
+      levelData.xp -= xpNeeded;
 
       try {
         backgroundCard(levelData, backgroundData, message.author, expModel, message);
@@ -41,8 +40,7 @@ async function xp(message) {
 
       checkLevel(level, guild, message.member);
     }
-
-    levelData.save();
+    await levelData.save();
   } else {
     expModel.create({ guildID: constantsFile.mainServerID, xp: randomNumber, memberID: message.author.id, level: 0 });
   }
