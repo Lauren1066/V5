@@ -27,7 +27,7 @@ async function xp(message) {
     levelData.xp += randomNumber;
 
     if (xpNeeded <= levelData.xp) {
-      level++;
+      levelData.level++;
       levelData.xp -= xpNeeded;
 
       try {
@@ -38,7 +38,7 @@ async function xp(message) {
         message.channel.send("Your custom card does not seem to be working!");
       }
 
-      checkLevel(level, guild, message.member);
+      checkLevel(levelData.level, guild, message.member);
     }
     await levelData.save();
   } else {
