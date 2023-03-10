@@ -3,6 +3,7 @@ const { EmbedBuilder } = require("discord.js");
 const constantsFile = require("../../Storage/constants.js");
 
 async function messageLB(job, client) {
+  console.log("Message LB function running");
   var mainGuild = client.guilds.cache.get(constantsFile.mainServerID);
   var eventChannel = mainGuild.channels.cache.get(constantsFile.mainLBChannel);
 
@@ -16,7 +17,7 @@ async function messageLB(job, client) {
     .sort([["messages", "descending"]])
     .limit(2)
     .then(async (res) => {
-      if (err) console.log(err);
+      console.log(res);
       if (res[0].memberID != constantsFile.ownerID) {
         const eventChannel = mainGuild.channels.cache.get(constantsFile.mainLBChannel);
         const topUser = await (await mainGuild.members.fetch(res[0].memberID)).user;
