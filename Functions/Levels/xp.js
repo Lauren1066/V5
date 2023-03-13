@@ -30,10 +30,15 @@ async function xp(message) {
       levelData.level++;
       levelData.xp -= xpNeeded;
 
-      try {
-        backgroundCard(levelData, backgroundData, message.author, expModel, message);
-      } catch (error) {
-        console.log(error);
+      if (backgroundData) {
+        try {
+          backgroundCard(levelData, backgroundData, message.author, expModel, message);
+        } catch (error) {
+          message.channel.send("Your background card doesn't seem to be working!");
+          card(levelData, message.author, expModel, message);
+          console.error(error);
+        }
+      } else {
         card(levelData, message.author, expModel, message);
         message.channel.send("Your custom card does not seem to be working!");
       }
