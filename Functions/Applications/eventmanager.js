@@ -54,10 +54,12 @@ async function eventmanagerApplication(message) {
       });
       i++;
     }
-    channel.send({
+    const sentMessage = await channel.send({
       content: `<@&${constantsFile.applicationPingRole}>`,
       embeds: [embed],
     });
+    sentMessage.react("👎");
+    sentMessage.react("👍");
   }
 }
 // Change export name to eventmanagerApplication

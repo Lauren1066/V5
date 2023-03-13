@@ -57,10 +57,12 @@ async function modApplication(message) {
       });
       i++;
     }
-    channel.send({
+    const sentMessage = await channel.send({
       content: `<@&${constantsFile.applicationPingRole}>`,
       embeds: [embed],
     });
+    sentMessage.react("👎");
+    sentMessage.react("👍");
   }
 }
 module.exports = { modApplication };
