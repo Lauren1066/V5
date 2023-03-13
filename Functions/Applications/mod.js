@@ -61,8 +61,8 @@ async function modApplication(message) {
       content: `<@&${constantsFile.applicationPingRole}>`,
       embeds: [embed],
     });
-    sentMessage.react("👎");
-    sentMessage.react("👍");
+    await sentMessage.react("👎");
+    await sentMessage.react("👍");
   }
 }
 module.exports = { modApplication };

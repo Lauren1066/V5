@@ -59,8 +59,8 @@ async function tutorApplication(message) {
       content: `<@&${constantsFile.applicationPingRole}>`,
       embeds: [embed],
     });
-    sentMessage.react("👎");
-    sentMessage.react("👍");
+    await sentMessage.react("👎");
+    await sentMessage.react("👍");
   }
 }
 // Change export name to tutorApplication
