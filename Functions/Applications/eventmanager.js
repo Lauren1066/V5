@@ -58,6 +58,7 @@ async function eventmanagerApplication(message) {
       content: `<@&${constantsFile.applicationPingRole}>`,
       embeds: [embed],
     });
+    console.log(sentMessage);
     await sentMessage.react("👎");
     await sentMessage.react("👍");
   }
