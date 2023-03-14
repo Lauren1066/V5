@@ -39,6 +39,9 @@ module.exports = {
     }
 
     if (message.channel.type === 0) {
+      if (message.author.id === "977473891389833247") {
+        message.reply("Is that a JoJo reference?");
+      }
       if (
         message.member.roles.cache.has(constantsFile.mainStaffrole) == false &&
         message.member.roles.cache.has(constantsFile.canReadRole) == false
