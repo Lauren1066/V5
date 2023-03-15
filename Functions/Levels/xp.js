@@ -40,7 +40,6 @@ async function xp(message) {
         }
       } else {
         card(levelData, message.author, expModel, message);
-        message.channel.send("Your custom card does not seem to be working!");
       }
 
       checkLevel(levelData.level, guild, message.member);
